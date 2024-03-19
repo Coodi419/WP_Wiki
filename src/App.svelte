@@ -92,7 +92,7 @@
 	}
 	#contents {
 		background-color: #ffffff;
-		height: 100%;
+		min-height: 50rem;
 		width: 62%;
 		margin-left: 9%;
 		margin-top: 15px;
@@ -101,6 +101,7 @@
 		outline-offset: -2px;
 		padding-block: 1px;
 		padding-inline: 2px;
+		word-break: break-all;
 	}
 
 	#tool_bar {

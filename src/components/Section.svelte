@@ -3,14 +3,14 @@
         <h2><ion-icon name="chevron-down-outline" id="down_arrow_1" class="down_arrow"></ion-icon><a href="/" id="num_1">1.</a><span id="headline_1" class="headline">&nbsp개요</span></h2>
         <div id="section_1">
             <div id="text_contents">
-                21기 WP평균. 그중 커뮤니티 영역을 맡고있다. 前 테트리스 고인물 現 김승억 사무국장 놀리기 챔피언이다.
+                박도현: 1학년 3반 4번, 2학년 3반 4번, 3학년 4반 7번이다. 테트리스 고인물이<s>였</s>다.
             </div>
         </div>
-        <h2><ion-icon name="chevron-down-outline" id="down_arrow_2" class="down_arrow"></ion-icon><a href="/" id="num_2">2.</a><span id="headline_2" class="headline">&nbsp빌런력</span></h2>
+        <h2><ion-icon name="chevron-down-outline" id="down_arrow_2" class="down_arrow"></ion-icon><a href="/" id="num_2">2.</a><span id="headline_2" class="headline">&nbsp상세</span></h2>
         <div id="section_2">
             <div id="text_contents">
-                빌런력 890 <br>
-                무시무시한 빌런력의 소유자다.  vrchat 갤러리에서 음지글을 작성하다 고로시당한 전적이 있다. 21기 테러단체 "Disablo"에 속해있다.
+                21기 도현 스쿼드중 얼굴 미남을 맡고 있다. <s>잘생긴 도현</s><br>
+                앱등이다. 맥북 배경화면이 <a href="https://namu.wiki/w/%EB%AA%A8%EB%B0%94%EC%9D%BC%20%EA%B2%8C%EC%9E%84">모바일 게임</a> <a href="https://namu.wiki/w/%EB%B8%94%EB%A3%A8%20%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C">블루아카이브</a> 캐릭터중 하나인 <a href="https://namu.wiki/w/%EB%AF%B8%EC%86%8C%EB%85%B8%20%EB%AF%B8%EC%B9%B4">미소노 미카</a>이다.
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
 <style>
     section {
         padding: 20px;
-        height: 300%;
+        height: auto;
     }
     #num {
         color: #0275d8;
@@ -82,5 +82,8 @@
     }
     #text_contents {
         font-size: 14px;
+    }
+    a {
+        color: #0275D8;
     }
 </style>
