@@ -32,6 +32,12 @@
 </main>
 
 <style>
+	* {
+		box-sizing: border-box;
+		text-wrap: balance;
+		word-break: keep-all;
+	}
+
 	main {
 		padding: 0;
 		max-width: 240px;
@@ -93,7 +99,7 @@
 	#contents {
 		background-color: #ffffff;
 		min-height: 50rem;
-		width: 62%;
+		width:950px;
 		margin-left: 9%;
 		margin-top: 15px;
 		border-radius: 5px;
@@ -106,9 +112,10 @@
 
 	#tool_bar {
 		width: 100%;
-		height: 40px;
+		height: 50px;
 		padding: 6px;
 		background: linear-gradient(90deg, #00a69c, #00a69c, #28b472);
+		display: flex;
 	}
 
 	#profile {
