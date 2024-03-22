@@ -9,6 +9,6 @@
   <main>
 	<Router {url}>
 		<Route path="/" component={Home} />
-		<Route path="/login.html" component={Login} />
+		<Route path="/login" component={Login} />
 	</Router>
   </main>

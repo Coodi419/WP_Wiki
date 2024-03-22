@@ -16,7 +16,7 @@
 				<a href="/" title="이동" id="random"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" id="random_icon" data-v-3070b92f=""><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a>
 			</form>
 			<div id="profile">
-				<a href="login.html" id="profile_button"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" id="profile_icon" data-v-c0860ca0="" data-v-76d6fdf5=""><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></a>
+				<a href="/login" id="profile_button"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" id="profile_icon" data-v-c0860ca0="" data-v-76d6fdf5=""><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></a>
 			</div>
 		</div>
 		
