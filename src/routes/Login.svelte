@@ -1,10 +1,5 @@
 <script>
-	import Header from './components/Header.svelte'
-	import Nav from './components/Nav.svelte'
-	import Aside from './components/Aside.svelte';
-	import Footer from './components/Footer.svelte';
-	import Section from './components/Section.svelte';
-	import Article from './components/Article.svelte';
+	import LoginContent from "../components/Login_Content.svelte";
 	export let name;
 </script>
 <main>
@@ -23,6 +18,7 @@
 		
 	</div>
 	<div id="contents">
+		<LoginContent/>
 	</div>
 </main>
 
