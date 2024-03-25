@@ -1,7 +1,10 @@
+<script>
+    import inputNnumber from './../App.svelte'
+</script>
 <header>
     <div id="head_title">
         <div id="head_line_div">
-            <p id="title">3학년 4반/박도현</p>
+            <p id="title">{inputNnumber}/박도현</p>
             <p id="time">최근 수정 시각: 2024-03-12 10:08:37</p>
         </div>
         <div id="head_div">

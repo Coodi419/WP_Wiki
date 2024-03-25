@@ -4,7 +4,6 @@
 	import Aside from '.././components/Aside.svelte';
 	import Footer from '.././components/Footer.svelte';
 	import Section from '.././components/Section.svelte';
-	export let name;
 </script>
 <main>
 	<div id="tool_bar">
