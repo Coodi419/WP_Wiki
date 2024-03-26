@@ -4,6 +4,8 @@
 	import Aside from '.././components/Aside.svelte';
 	import Footer from '.././components/Footer.svelte';
 	import Section from '.././components/Section.svelte';
+
+	export let answer;
 </script>
 <main>
 	<div id="tool_bar">
@@ -21,7 +23,7 @@
 		
 	</div>
 	<div id="contents">
-		<Header/>	
+		<Header num={answer}/>	
 		<Nav/>
 		<Aside/>
 		<Section/>

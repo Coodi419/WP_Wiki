@@ -1,19 +1,11 @@
 <script>
-    const request = async (endpoint) => {
-		const resp = await fetch(`http://localhost:8000/api${endpoint}`);
-		const result = await resp.json();
-		return result;
-	};
-
-	const getNumberFromBackend = async (no) => {
-		const result = await request(`/post/${no}`);
-		number = result.data;
-	};
+    import Parent from './../routes/Home.svelte';
+    export let num;
 </script>
 <header>
     <div id="head_title">
         <div id="head_line_div">
-            <p id="title"></p>
+            <p id="title">{num}</p>
             <p id="time">최근 수정 시각: 2024-03-12 10:08:37</p>
         </div>
         <div id="head_div">
