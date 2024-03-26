@@ -1,38 +1,46 @@
 <script>
-	import {Router, Link, Route } from 'svelte-routing'
-	import Home from "./routes/Home.svelte"
-	import Login from './routes/Login.svelte'
-	export let url = "";
-	let number;
-	let inputNumber;
+    import {Router, Link, Route } from 'svelte-routing'
+    import Home from "./routes/Home.svelte"
+    import Login from './routes/Login.svelte'
+ //   import { page } from '$app/stores'
+    import { debug } from 'svelte/internal';
 
-	const request = async (endpoint) => {
-		const resp = await fetch(`http://localhost:8000/${endpoint}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8'
-			},
-			body: JSON.stringify('test')
-		});
-		const result = await resp.json();
-		return result;
-	};
+    export let url = "";
+    let number;
+    let inputNumber;
 
-	const getNumberFromBackend = async (no) => {
-		const result = await request(`${no}`);
-		number = result.data;
-	};
-  </script>
+    function replacer(key, value) {
+        if (typeof(value) === 'string') {
+            return undefined;
+        }
+        return value;
+    }
+
+    const request = async (endpoint, formJson) => {
+        const resp = await fetch(`http://localhost:8000/${endpoint}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify(formJson, replacer)
+        });
+
+        const result = await resp.json();
+        return result.data;
+    };
+
+    //const requestWrite = request('write/output', {'path': page.path})
+</script>
   
   <main>
-	<Router {url}>
-		<Route path="/" component={Home} answer = {3} />
-		<Route path="/login" component={Login} />
-	</Router>
+    <Router {url}>
+        <Route path="/" component={Home} requestWrite={''} />
+        <Route path="/login" component={Login} />
+    </Router>
   </main>
 
   <style>
-	h1 {
-		color: brown;
-	}
+    h1 {
+        color: brown;
+    }
   </style>

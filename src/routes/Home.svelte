@@ -5,7 +5,7 @@
 	import Footer from '.././components/Footer.svelte';
 	import Section from '.././components/Section.svelte';
 
-	export let answer;
+	export let requsetWrite;
 </script>
 <main>
 	<div id="tool_bar">
@@ -23,7 +23,7 @@
 		
 	</div>
 	<div id="contents">
-		<Header num={answer}/>	
+		<Header wikiTitle={requsetWrite}/>	
 		<Nav/>
 		<Aside/>
 		<Section/>
