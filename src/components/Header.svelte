@@ -1,5 +1,5 @@
 <script>
-    export let path;
+    export let path = undefined;
 </script>
 <header>
     <div id="head_title">

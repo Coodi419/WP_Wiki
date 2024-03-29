@@ -5,9 +5,27 @@
 	import Footer from '.././components/Footer.svelte';
 	import Section from '.././components/Section.svelte';
 
-	export let path;
-	export let request;
-	const dd = request('write/output',{path:path});
+	export let path = undefined;
+	
+	const resp = fetch(`http://localhost:8000/write/output?path=${path}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+        });
+
+    fetch(`http://localhost:8000/write/output?path=${path}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
+    }) // 1)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {  // 2)
+    console.log(myJson);
+  });
 </script>
 <main>
 	<div id="tool_bar">
@@ -25,7 +43,8 @@
 		
 	</div>
 	<div id="contents">
-		<p>dd</p>
+		<p>{dd}</p>
+		<p>{path}</p>
 		<Header path={path}/>	
 		<Nav/>
 		<Aside/>

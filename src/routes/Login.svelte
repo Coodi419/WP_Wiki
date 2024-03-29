@@ -1,6 +1,6 @@
 <script>
 	import LoginContent from "../components/Login_Content.svelte";
-	export let id;
+	export let path;
 </script>
 <main>
 	<div id="tool_bar">
@@ -19,6 +19,7 @@
 	</div>
 	<div id="contents">
 		<LoginContent/>
+		<p>{path}</p>
 	</div>
 </main>
 
