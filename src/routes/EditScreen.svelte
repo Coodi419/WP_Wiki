@@ -1,11 +1,5 @@
 <script>
-	import Header from '.././components/Header.svelte'
-	import Nav from '.././components/Nav.svelte'
-	import Aside from '.././components/Aside.svelte';
-	import Footer from '.././components/Footer.svelte';
-	import Section from '.././components/Section.svelte';
-
-	export let path;
+	
 </script>
 <main>
 	<div id="tool_bar">
@@ -23,11 +17,7 @@
 		
 	</div>
 	<div id="contents">
-		<Header path={path}/>	
-		<Nav/>
-		<Aside/>
-		<Section/>
-		<Footer/>
+		<p>화장실 다녀옴</p>
 	</div>
 </main>
 

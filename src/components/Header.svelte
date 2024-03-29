@@ -1,11 +1,10 @@
 <script>
-    import Parent from './../routes/Home.svelte';
-    export let wikiTitle;
+    export let path;
 </script>
 <header>
     <div id="head_title">
         <div id="head_line_div">
-            <p id="title">{wikiTitle || '웹플위키'}</p>
+            <p id="title">{path || '웹플위키'}</p>
             <p id="time">최근 수정 시각: 2024-03-12 10:08:37</p>
         </div>
         <div id="head_div">

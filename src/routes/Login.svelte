@@ -1,6 +1,6 @@
 <script>
 	import LoginContent from "../components/Login_Content.svelte";
-	export let name;
+	export let id;
 </script>
 <main>
 	<div id="tool_bar">

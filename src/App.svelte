@@ -2,8 +2,10 @@
     import {Router, Link, Route } from 'svelte-routing'
     import Home from "./routes/Home.svelte"
     import Login from './routes/Login.svelte'
+    import EditScreen from './routes/EditScreen.svelte'
  //   import { page } from '$app/stores'
-    import { debug } from 'svelte/internal';
+    import { component_subscribe, debug } from 'svelte/internal';
+    import { params } from 'svelte-spa-router';
 
     export let url = "";
     let number;
@@ -33,10 +35,13 @@
 </script>
   
   <main>
-    <Router {url}>
-        <Route path="/" component={Home} requestWrite={''} />
-        <Route path="/login" component={Login} />
+    <Router {url}>  
+        <Route path = "/" component={Home} requestWrite={''}></Route>
+        <Route path = "/login" component={Login} requestWrite={''}></Route>
+        <Route path = "/edit" component={EditScreen} requestWrite={''}></Route>
+        <Route path= "/w/*path" component={Home} requestWrite={''}></Route>
     </Router>
+
   </main>
 
   <style>
