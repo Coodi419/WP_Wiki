@@ -30,16 +30,14 @@
         const result = await resp.json();
         return result.data;
     };
-
-    //const requestWrite = request('write/output', {'path': page.path})
 </script>
   
   <main>
     <Router {url}>  
-        <Route path = "/" component={Home} requestWrite={''}></Route>
+        <Route path = "/" component={Home} requestWrite={''} {request}></Route>
         <Route path = "/login" component={Login} requestWrite={''}></Route>
         <Route path = "/edit" component={EditScreen} requestWrite={''}></Route>
-        <Route path= "/w/*path" component={Home} requestWrite={''}></Route>
+        <Route path= "/w/*path" component={Home} requestWrite={''}> {request}</Route>
     </Router>
 
   </main>

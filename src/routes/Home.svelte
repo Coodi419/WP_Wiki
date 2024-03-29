@@ -6,6 +6,8 @@
 	import Section from '.././components/Section.svelte';
 
 	export let path;
+	export let request;
+	const dd = request('write/output',{path:path});
 </script>
 <main>
 	<div id="tool_bar">
@@ -23,6 +25,7 @@
 		
 	</div>
 	<div id="contents">
+		<p>dd</p>
 		<Header path={path}/>	
 		<Nav/>
 		<Aside/>
