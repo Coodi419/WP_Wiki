@@ -43,7 +43,6 @@
 		
 	</div>
 	<div id="contents">
-		<p>{dd}</p>
 		<p>{path}</p>
 		<Header path={path}/>	
 		<Nav/>

@@ -17,7 +17,7 @@
 		
 	</div>
 	<div id="contents">
-		<p>화장실 다녀옴</p>
+		<p>나 개발자 아니얌, request는 너가 해'줘'</p>
 	</div>
 </main>
 
