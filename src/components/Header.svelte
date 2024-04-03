@@ -1,11 +1,20 @@
 <script>
     export let path = undefined;
+    export let writeOutput = {};
 </script>
 <header>
     <div id="head_title">
         <div id="head_line_div">
-            <p id="title">{path || '웹플위키'}</p>
-            <p id="time">최근 수정 시각: 2024-03-12 10:08:37</p>
+            <p id="title">{path || ''}</p>
+            <!-- <p id="time">최근 수정 시각: 2024-03-12 10:08:37</p> -->
+            {#await writeOutput} <!-- 동작 중일 때 처리 -->
+                <div></div>
+            {:then post} <!-- 정상 종료 후 처리 -->
+                <div>
+                    최근 수정 시각: {post.data.recent_edit.slice(0, 4)}-{post.data.recent_edit.slice(4, 6)}-{post.data.recent_edit.slice(6, 8)}
+                    {post.data.recent_edit.slice(8, 10)}:{post.data.recent_edit.slice(10, 12)}:{post.data.recent_edit.slice(12, 14)}
+                </div>
+            {/await}
         </div>
         <div id="head_div">
             <div id="head_button">

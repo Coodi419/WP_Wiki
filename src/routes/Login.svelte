@@ -19,7 +19,6 @@
 	</div>
 	<div id="contents">
 		<LoginContent/>
-		<p>{path}</p>
 	</div>
 </main>
 

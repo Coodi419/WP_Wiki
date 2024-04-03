@@ -1,6 +1,6 @@
 <aside>
     <div id="index">
-        <p id="index_text">목차</p>
+        <p id="index_text">목차</p> <!-- TODO: 이거 목차는 어떻게 구성하지? 데이터베이스에 넣어놓기엔 좀 그런데.. regex로 파싱하고 for문 돌려서 개수 세기?-->
         <div id="index_content">
             <span><a href="">1</a>. 개요</span>
             <span><a href="">2</a>. 상세</span>

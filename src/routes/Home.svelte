@@ -7,25 +7,12 @@
 
 	export let path = undefined;
 	
-	const resp = fetch(`http://localhost:8000/write/output?path=${path}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            },
-        });
-
-    fetch(`http://localhost:8000/write/output?path=${path}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-        },
-    }) // 1)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {  // 2)
-    console.log(myJson);
-  });
+	async function getWrite(){
+        const res = await fetch(`/write/output?path=${path}`, {method: 'POST'});
+        const json = await res.json();
+        return JSON.parse(json)         // parsing한 json
+    }
+    let writeOutput = getWrite();
 </script>
 <main>
 	<div id="tool_bar">
@@ -43,11 +30,10 @@
 		
 	</div>
 	<div id="contents">
-		<p>{path}</p>
-		<Header path={path}/>	
-		<Nav/>
+		<Header path={path} writeOutput="{writeOutput}"/>
+		<Nav writeOutput="{writeOutput}"/>
 		<Aside/>
-		<Section/>
+		<Section writeOutput="{writeOutput}"/>
 		<Footer/>
 	</div>
 </main>
