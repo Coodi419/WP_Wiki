@@ -30,6 +30,7 @@
         const result = await resp.json();
         return result.data;
     };
+    // ㅈㅅㅎㄴㄷ
 </script>
   
   <main>
