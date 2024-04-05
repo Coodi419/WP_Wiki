@@ -32,7 +32,7 @@ function serve() {
 export default {
 	input: 'src/main.js',
 	output: {
-		sourcemap: true,
+		sourcemap: true,  // 이거 false 해야 코드 유출 안됨
 		format: 'iife',
 		name: 'app',
 		file: 'public/build/bundle.js'
