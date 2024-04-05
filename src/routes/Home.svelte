@@ -5,6 +5,8 @@
 	import Footer from '.././components/Footer.svelte';
 	import Section from '.././components/Section.svelte';
 
+	import {convertWordToHtml} from '../modules/parseContext.js'
+
 	export let path = undefined;
 	
 	async function getWrite(){
@@ -12,7 +14,7 @@
         const json = await res.json();
         return JSON.parse(json)         // parsing한 json
     }
-    let writeOutput = getWrite();
+    let writeOutputPromise = getWrite();
 </script>
 <main>
 	<div id="tool_bar">
@@ -30,11 +32,16 @@
 		
 	</div>
 	<div id="contents">
-		<Header path={path} writeOutput="{writeOutput}"/>
-		<Nav writeOutput="{writeOutput}"/>
-		<Aside/>
-		<Section writeOutput="{writeOutput}"/>
-		<Footer/>
+		{#await writeOutputPromise}
+			<div></div>
+		{:then writeOutput}
+			{@const convertedContent = convertWordToHtml(writeOutput.data.content)}
+			<Header path={path} writeOutput="{writeOutput}"/>
+			<Nav writeOutput="{writeOutput}"/>
+			<Aside/>
+			<Section writeOutput="{writeOutput}" convertedContent="{convertedContent}"/>
+			<Footer/>
+		{/await}
 	</div>
 </main>
 

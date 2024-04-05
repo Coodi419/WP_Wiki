@@ -1,31 +1,54 @@
 <script>
     export let writeOutput = {};
+    export let convertedContent = {};
 
-    window.onload = function () {
-        var e1_1 = document.getElementById("down_arrow_1");
-        var e1_2 = document.getElementById("headline_1");
-        var e2_1 = document.getElementById("down_arrow_2");
-        var e2_2 = document.getElementById("headline_2");
-        e1_1.onclick = function() {click_title("1")};
-        e1_2.onclick = function() {click_title("1")};
-        e2_1.onclick = function() {click_title("2")};
-        e2_2.onclick = function() {click_title("2")};
-    }
+    // window.onload = function () {
+    //     var e1_1 = document.getElementById("down_arrow_1");
+    //     var e1_2 = document.getElementById("headline_1");
+    //     var e2_1 = document.getElementById("down_arrow_2");
+    //     var e2_2 = document.getElementById("headline_2");
+    //     e1_1.onclick = function() {click_title("1")};
+    //     e1_2.onclick = function() {click_title("1")};
+    //     e2_1.onclick = function() {click_title("2")};
+    //     e2_2.onclick = function() {click_title("2")};
+    // }
+    // function click_title(n)  {
+    //     var headline_string = "headline_" + n;
+    //     var down_arrow_string = "down_arrow_" + n;
+    //     var num_string = "num_" + n;
+    //     var section_string = "section_" + n;
+    //     if(document.getElementById(down_arrow_string).name === "chevron-forward-outline")
+    //     {
+    //         document.getElementById(headline_string).style.color = "black";
+    //         document.getElementById(down_arrow_string).style.color = "black";
+    //         document.getElementById(down_arrow_string).name = "chevron-down-outline";
+    //         document.getElementById(num_string).style.color = "#0275d8";
+    //         document.getElementById(section_string).style.display = "block";
+    //     }
+    //     else
+    //     {
+    //         document.getElementById(headline_string).style.color = "#b3b3b3";
+    //         document.getElementById(down_arrow_string).style.color = "#b3b3b3";
+    //         document.getElementById(down_arrow_string).name = "chevron-forward-outline";
+    //         document.getElementById(num_string).style.color = "#80BAEB";
+    //         document.getElementById(section_string).style.display = "none";
+    //     }
+    // }
+
+
     function click_title(n)  {
-        var headline_string = "headline_" + n;
-        var down_arrow_string = "down_arrow_" + n;
-        var num_string = "num_" + n;
-        var section_string = "section_" + n;
-        if(document.getElementById(down_arrow_string).name === "chevron-forward-outline")
-        {
+        const headline_string = "headline_" + n;
+        const down_arrow_string = "down_arrow_" + n;
+        const num_string = "num_" + n;
+        const section_string = "section_" + n;
+        if(document.getElementById(down_arrow_string).name === "chevron-forward-outline") {
             document.getElementById(headline_string).style.color = "black";
             document.getElementById(down_arrow_string).style.color = "black";
             document.getElementById(down_arrow_string).name = "chevron-down-outline";
             document.getElementById(num_string).style.color = "#0275d8";
             document.getElementById(section_string).style.display = "block";
         }
-        else
-        {
+        else {
             document.getElementById(headline_string).style.color = "#b3b3b3";
             document.getElementById(down_arrow_string).style.color = "#b3b3b3";
             document.getElementById(down_arrow_string).name = "chevron-forward-outline";
@@ -37,7 +60,7 @@
 
 <section>
 <!--    <div>
-        <h2><ion-icon name="chevron-down-outline" id="down_arrow_1" class="down_arrow"></ion-icon><a href="/" id="num_1">1.</a><span id="headline_1" class="headline">&nbsp개요</span></h2>
+        <h2><ion-icon name="chevron-down-outline" id="down_arrow_1" class="down_arrow" on:click="{() => click_title('1')}"></ion-icon><a href="/" id="num_1">1.</a><span id="headline_1" class="headline">&nbsp개요</span></h2>
         <div id="section_1">
             <div id="text_contents">
                 {#await writeOutput}
@@ -56,12 +79,19 @@
             </div>
         </div>
     </div> -->
-    <div>
+
+
+<!--    <div>
         {#await writeOutput}
             <div></div>
         {:then post}
             <div>{post.data.content}</div>
         {/await}
+    </div> -->
+
+    <div>
+        <!-- {writeOutput.data.content} -->
+        {@html convertedContent.text}
     </div>
 </section>
 
