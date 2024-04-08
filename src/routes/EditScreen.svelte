@@ -1,5 +1,5 @@
 <script>
-	
+	import Article from './../components/Article.svelte';
 </script>
 <main>
 	<div id="tool_bar">
@@ -17,11 +17,13 @@
 		
 	</div>
 	<div id="contents">
-		<p>나 개발자 아니얌, request는 너가 해'줘'</p>
+		<Article></Article>
 	</div>
 </main>
 
 <style>
+	
+
 	* {
 		box-sizing: border-box;
 		text-wrap: balance;
