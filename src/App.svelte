@@ -1,5 +1,6 @@
 <script>
     import {Router, Link, Route } from 'svelte-routing'
+
     import Home from "./routes/Home.svelte"
     import Login from './routes/Login.svelte'
     import EditScreen from './routes/EditScreen.svelte'
@@ -30,18 +31,16 @@
         const result = await resp.json();
         return result.data;
     };
-    // ㅈㅅㅎㄴㄷ
 </script>
   
-  <main>
-    <Router {url}>  
+<main>
+    <Router {url}>
         <Route path = "/" component={Home} requestWrite={''} {request}></Route>
         <Route path = "/login" component={Login} requestWrite={''}></Route>
         <Route path = "/editscreen" component={EditScreen} requestWrite={''}></Route>
         <Route path= "/w/*path" component={Home} requestWrite={''}> {request}</Route>
     </Router>
-
-  </main>
+</main>
 
   <style>
     h1 {

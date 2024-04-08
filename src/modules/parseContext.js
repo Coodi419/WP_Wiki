@@ -19,7 +19,7 @@
 틀은 이거 다 만들고 할까말까나 생각해봄;
 
 옵션들은 O:B|I|S:텍스트 등으로 구분
-`
+` // TODO: 각주 만들기
 
 const SyntaxToHtml = {
     B: 'strong',
@@ -81,7 +81,9 @@ export function convertWordToHtml(text) {
                     contentParagraph += `<span><a>${'&nbsp;'.repeat(4 * (hCount - 2))}</a><a href="">${numberParagraph}</a>. ${textMatch[1]}</span>\n`
 
                     // text = text.replace(match[0], `${countParagraph === 1 ? "" : "</div>"}<h${hCount} id=${countParagraph}> ${numberParagraph}. ${textMatch[1]} </h${hCount}><div id="section_${countParagraph}">`);
-                    text = text.replace(match[0], `${countParagraph === 1 ? "" : "</div>"} <h${hCount} id=${countParagraph}><ion-icon name="chevron-down-outline" id="down_arrow_${countParagraph}" class="down_arrow" on:click="{() => click_title('${countParagraph}')}"></ion-icon><a href="/" id="num_1">1.</a><span id="headline_1" class="headline">&nbsp${textMatch[1]}</span></h>`);
+                    // text = text.replace(match[0], `${countParagraph === 1 ? "" : "</div>"} <h${hCount} id=${countParagraph}><ion-icon name="chevron-down-outline" id="down_arrow_${countParagraph}" class="down_arrow" on:click="{() => click_title('${countParagraph}')}"></ion-icon><a href="/" id="num_1">1.</a><span id="headline_1" class="headline">&nbsp${textMatch[1]}</span></h>`);
+                    // text = text.replace(match[0], `${countParagraph === 1 ? "" : "</div>"} <h${hCount} id=${countParagraph}><ion-button onclick = "click_title('${countParagraph}')"><ion-icon name="chevron-down-outline" id="down_arrow_${countParagraph}" class="down_arrow"></ion-icon></ion-button><a href="/" id="num_1">1.</a><span id="headline_1" class="headline">&nbsp${textMatch[1]}</span></h>`);
+                    text = text.replace(match[0], `${countParagraph === 1 ? "" : "</div>"} <h${hCount} id=${countParagraph}><a onclick="click_title('${countParagraph}');")><ion-icon name="chevron-down-outline" id="down_arrow_${countParagraph}" class="down_arrow"></ion-icon></a><a href="/" id="num_1">1.</a><span id="headline_1" class="headline">&nbsp${textMatch[1]}</span></h>`);
                     break;
 
                 case 'L':
@@ -131,3 +133,19 @@ let ans = convertWordToHtml(`[[H2:뭉탱이월드]]
 [[H3:그의 코]]
 너무 거대하다.`)
 console.log(ans);
+
+
+`
+[[H2:뭉탱이월드]]
+코[[O:B|I:뭉탱이월드]]에는 무엇이 사는가? 바로 [[O:B|S:코괴물]]이 산다!
+[[H3:코탱이월드]]
+[[L:코코코|월드]]
+이것은 코월드의 위치이다.
+이것을 보면 [[O:S:죽는다.]]
+[[H4:실물]]
+그의 실물을 본 사람은 [[O:B:없다.]]
+[[H2:근황]]
+그는 현재 뭉탱이월드를 파괴했다.
+[[H3:그의 코]]
+너무 거대하다.
+`
