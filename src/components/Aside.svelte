@@ -1,9 +1,33 @@
+<script>
+    export let matchesParagraph = [];
+
+    let textParagraph = [0, 0, 0];
+
+    const resetParagraph = () => {textParagraph = [0, 0, 0]; return true;}
+    const recordParagraph = (num) => {
+        switch (num) {
+            case '2':
+                textParagraph[1] = textParagraph[2] = 0;
+                return [`${++textParagraph[0]}`, 2];
+            case '3':
+                textParagraph[2] = 0;
+                return [`${textParagraph[0]}-${++textParagraph[1]}`, 3];
+            default:  // 4 and more
+                return [`${textParagraph[0]}-${textParagraph[1]}-${++textParagraph[2]}`, 4];
+        }
+    }
+
+    resetParagraph()
+</script>
+
 <aside>
     <div id="index">
         <p id="index_text">목차</p> <!-- TODO: 이거 목차는 어떻게 구성하지? 데이터베이스에 넣어놓기엔 좀 그런데.. regex로 파싱하고 for문 돌려서 개수 세기?-->
         <div id="index_content">
-            <span><a href="">1</a>. 개요</span>
-            <span><a href="">2</a>. 상세</span>
+            {#each matchesParagraph as match}
+                {@const textParagraph = recordParagraph(match[0][3])}
+                <span>{'\u00A0'.repeat((textParagraph[1] - 2) * 2)}<a href="#para_{textParagraph[0]}">{textParagraph[0]}</a>. {match[0].slice(5, match[0].length-2)}</span>
+            {/each}
         </div>
     </div>
 </aside>
