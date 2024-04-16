@@ -1,3 +1,30 @@
+<script>
+    let email = '';
+    let password = '';
+
+    async function post_form(){
+        const user = {
+            "email": email,
+            "password": password
+        }
+
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(response => {
+          // console.log(response);
+            window.location.href = "/";
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+</script>
+
 <article>
     <div id="Login_Title">
         <div id="Login_Title_2">
@@ -6,14 +33,14 @@
     </div>
     <div>
         <div>
-            <form method="post" id="LoginForm">
-                <div id="usernameBox">
-                    <label for="usernameInput">Username</label>
-                    <input type="text" id="usernameInput" name="username">
+            <form method="post" id="LoginForm" on:submit|preventDefault={post_form}>
+                <div class="usernameBox">
+                    <label for="usernameInput">Email</label>
+                    <input type="text" id="usernameInput" name="email" bind:value={email}>
                 </div>
-                <div id="usernameBox">
+                <div class="usernameBox">
                     <label for="passwordInput">Password</label>
-                    <input type="password" id="passwordInput" name="password">
+                    <input type="password" id="passwordInput" name="password" bind:value={password}>
                 </div>
                 <div id="autoLoginBox">
                     <label id="autoLoginLabel">
@@ -93,7 +120,7 @@
         padding-block: 1px;
         padding-inline: 2px;
     }
-    #usernameBox {
+    .usernameBox {
         margin-bottom: 15px;
     }
     #LoginForm {
