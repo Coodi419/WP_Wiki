@@ -1,5 +1,5 @@
 <script>
-	import Article from './../components/Article.svelte';
+	import Article from '../components/Editscreen/Article.svelte';
 	import Search_bar from './../components/Search_bar.svelte';
 </script>
 <main>

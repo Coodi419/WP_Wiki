@@ -1,6 +1,6 @@
 <script>
-    import ParagraphContents from "./ParagraphContents.svelte";
-    import EachContent from "./EachContent.svelte";
+    import ParagraphContents from "../ParagraphContents.svelte";
+    import EachContent from "../EachContent.svelte";
 
     export let writeOutput = {};
     export let matchesParagraph = [];
