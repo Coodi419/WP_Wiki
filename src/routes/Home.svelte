@@ -7,12 +7,23 @@
 	import Search_bar from './../components/Search_bar.svelte';
 
 	export let path = undefined;
+
+	if (path === '') { window.location.href = "/"; }
 	
 	async function getWrite(){
-        const res = await fetch(`/write/output?path=${path}`, {method: 'POST'});
-        const json = await res.json();
-        return JSON.parse(json)         // parsing한 json
-    }
+		if (path === undefined) {
+			const res = await fetch(`/main`, {method: 'POST'});
+			const json = await res.json();
+			path = json.data.path;
+			console.log(json);
+			return json
+		}
+		else {
+			const res = await fetch(`/write/output?path=${path}`, {method: 'POST'});
+			const json = await res.json();
+			return JSON.parse(json)
+		}
+	}
     let writeOutputPromise = getWrite();
 </script>
 <main>
@@ -24,7 +35,9 @@
 			{@const matchesParagraph = [...writeOutput.data.content.matchAll(/\[\[H[2-4]:([^\[\]]*)\]\]/g)]}
 			<Header path={path} writeOutput="{writeOutput}"/>
 			<Nav writeOutput="{writeOutput}"/>
-			<Aside matchesParagraph="{matchesParagraph}"/>
+			{#if matchesParagraph.length !== 0}
+				<Aside matchesParagraph="{matchesParagraph}"/>
+			{/if}
 			<Section writeOutput="{writeOutput}" matchesParagraph="{matchesParagraph}"/>
 			<Footer/>
 		{/await}

@@ -1,20 +1,26 @@
 <script>
-    export let path = undefined;
+    export let path = '';
     export let writeOutput = {};
+
+    const timeEdit = writeOutput.data.recent_edit
 </script>
 <header>
     <div id="head_title">
         <div id="head_line_div">
-            <p id="title">{path || ''}</p>
+            <p id="title">{path}</p>
             <!-- <p id="time">최근 수정 시각: 2024-03-12 10:08:37</p> -->
-            {#await writeOutput} <!-- 동작 중일 때 처리 -->
-                <div></div>
-            {:then post} <!-- 정상 종료 후 처리 -->
-                <div>
-                    최근 수정 시각: {post.data.recent_edit.slice(0, 4)}-{post.data.recent_edit.slice(4, 6)}-{post.data.recent_edit.slice(6, 8)}
-                    {post.data.recent_edit.slice(8, 10)}:{post.data.recent_edit.slice(10, 12)}:{post.data.recent_edit.slice(12, 14)}
-                </div>
-            {/await}
+            <!--{#await writeOutput} &lt;!&ndash; 동작 중일 때 처리 &ndash;&gt;-->
+            <!--    <div></div>-->
+            <!--{:then post} &lt;!&ndash; 정상 종료 후 처리 &ndash;&gt;-->
+            <!--    <div>-->
+            <!--        최근 수정 시각: {post.data.recent_edit.slice(0, 4)}-{post.data.recent_edit.slice(4, 6)}-{post.data.recent_edit.slice(6, 8)}-->
+            <!--        {post.data.recent_edit.slice(8, 10)}:{post.data.recent_edit.slice(10, 12)}:{post.data.recent_edit.slice(12, 14)}-->
+            <!--    </div>-->
+            <!--{/await}-->
+            <div>
+                최근 수정 시각: {timeEdit.slice(0, 4)}-{timeEdit.slice(4, 6)}-{timeEdit.slice(6, 8)}
+                {timeEdit.slice(8, 10)}:{timeEdit.slice(10, 12)}:{timeEdit.slice(12, 14)}
+            </div>
         </div>
         <div id="head_div">
             <div id="head_button">

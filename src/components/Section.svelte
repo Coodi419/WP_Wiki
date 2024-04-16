@@ -1,6 +1,6 @@
 <script>
     import ParagraphContents from "./ParagraphContents.svelte";
-    import {onMount} from 'svelte';
+    import EachContent from "./EachContent.svelte";
 
     export let writeOutput = {};
     export let matchesParagraph = [];
@@ -84,10 +84,10 @@
     //     }
     // }
 
-    function getLineNumber(text, index) {
-      const match = text.slice(0, index).match(/\n/g);
-      return (match ? match.length : 0) + 1;
-    }
+    // function getLineNumber(text, index) {
+    //   const match = text.slice(0, index).match(/\n/g);
+    //   return (match ? match.length : 0) + 1;
+    // }
 
 
 
@@ -99,7 +99,7 @@
     }
 
     let countParagraph = 0; let textParagraph = [0, 0, 0]
-    const getParagraph = () => {return countParagraph;}
+    // const getParagraph = () => {return countParagraph;}
     const incrementParagraph = () => {return ++countParagraph;}
     const recordParagraph = (num) => {
         switch (num) {
@@ -120,18 +120,6 @@
         return true;
     }
 
-    onMount(() => {
-
-    })
-
-
-    let listFootnotes = [];
-    let countFootnotes = 0;
-
-    const appendFootnotes = (text) => { listFootnotes.push(text); countFootnotes++; }
-
-    let isFootnoteMouseOver = false;
-
     const content = writeOutput.data.content;
     // const matches = [...content.matchAll(/\[\[H[2-4]:([^\[\]]*)\]\]/g)]
 
@@ -139,12 +127,47 @@
     for (let match of Array(matchesParagraph.length).keys()) {
         dictVisible[match+1] = true;
     }
-    const getDictSelection = (key) => {return dictVisible[key];}
+
+    const matchesFootnotes = [...content.matchAll(/\[\[F:([^\[\]]*)\]\]/g)];
+    let dictFootnotesText = {  // TODO: 이거 해결 어떻게 해야 본문에 넣을까?
+        // 글자: [숫자, [번호1, 번호2 ..], 텍스트] <- 글자인 경우 첫번째 텍스트만 반영
+        // 숫자: 텍스트
+    };
+
+    let dictTextToFootnote = {
+        // 텍스트: 숫자/텍스트
+    };
+
+    let listFootnotesText = [
+        // 그냥 인덱스 순서대로 글자/숫자
+    ];
+
+    let countFootnote = 0;
+    for (let match of matchesFootnotes) {
+        const splitMatch = match[1].split('|');
+
+        if (splitMatch.length === 1) {
+            countFootnote++;
+            dictFootnotesText[countFootnote] = match[1];
+            listFootnotesText.push(countFootnote);
+            dictTextToFootnote[match[1]] = countFootnote;
+        }
+        else if (splitMatch.length === 2) {
+            if (dictFootnotesText[splitMatch[1]] === undefined) {
+                listFootnotesText.push(splitMatch[1])
+                dictFootnotesText[splitMatch[1]] = [++countFootnote, 1, splitMatch[0]];
+                dictTextToFootnote[splitMatch[0]] = countFootnote;
+            }
+            else {
+                dictFootnotesText[splitMatch[1]][1] += 1
+            }
+        }
+    }
 </script>
 
 <section>
     {#if (matchesParagraph.length === 0)}
-        <div> nose </div>
+        <EachContent splitContent="{content}" dictTextToFootnote="{dictTextToFootnote}"/>
 
     {:else}
         {@const resetParesult = resetParagraph()}
@@ -155,7 +178,7 @@
             {@const nowParagraphNum = incrementParagraph()}
             {@const nowParagraphText = recordParagraph(numberParagraph)}
             {#if (numberParagraph === '2')}
-                <h2 id="para_{nowParagraphText}"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h2>
+                <h2 id="para_{nowParagraphText}" class="bottom_line"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h2>
             {:else if (numberParagraph === '3')}
                 <h3 id="para_{nowParagraphText}"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h3>
             {:else if (numberParagraph === '4')}
@@ -166,12 +189,34 @@
                 <ParagraphContents
                         content="{content.slice(match.index + match[0].length)}"
                         countParagraph="{indexMatch+1}"
-                        dictVisible="{dictVisible}" />
+                        dictVisible="{dictVisible}"
+                        dictFootnotesText="{dictFootnotesText}"
+                        dictTextToFootnote="{dictTextToFootnote}" />
             {:else}
                 <ParagraphContents
                         content="{content.slice(match.index + match[0].length, matchesParagraph[indexMatch+1].index)}"
                         countParagraph="{indexMatch+1}"
-                        dictVisible="{dictVisible}" />
+                        dictVisible="{dictVisible}"
+                        dictFootnotesText="{dictFootnotesText}"
+                        dictTextToFootnote="{dictTextToFootnote}" />
+            {/if}
+        {/each}
+
+        <br>
+        <div class="bottom_line"></div>
+        <br>
+
+        {#each listFootnotesText as footnote}
+            {#if isNaN(footnote)}
+                <div id="bottom_footnote_{footnote}">
+                    <a style="color: darkgoldenrod">[{footnote}]</a>
+                    <span>&nbsp;{dictFootnotesText[footnote][2]}</span>
+                </div>
+            {:else}
+                <div id="bottom_footnote_{footnote}">
+                    <a style="color: darkgoldenrod">[{footnote}]</a>
+                    <span>&nbsp;{dictFootnotesText[footnote]}</span>
+                </div>
             {/if}
         {/each}
     {/if}
@@ -194,8 +239,12 @@
     }
     h2 {
         padding: 5px;
+    }
+
+    .bottom_line {
         border-bottom: 1px solid #ced4da;
     }
+
     .down_arrow{
         color: #666;
         float: left;
