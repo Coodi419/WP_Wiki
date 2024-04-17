@@ -8,6 +8,8 @@
     export let dictTextToFootnote = {};
 
     const splitContents = content.split('\n')
+
+    // console.log(dictFootnotesText['스포일러'][1])
 </script>
 
 <div class="section_{countParagraph}">

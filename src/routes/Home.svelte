@@ -15,7 +15,6 @@
 			const res = await fetch(`/main`, {method: 'POST'});
 			const json = await res.json();
 			path = json.data.path;
-			console.log(json);
 			return json
 		}
 		else {
