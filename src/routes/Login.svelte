@@ -1,5 +1,5 @@
 <script>
-	import LoginContent from "../components/Login_Content.svelte";
+	import LoginContent from "../components/Login/Login_Content.svelte";
 	import Search_bar from './../components/Search_bar.svelte';
 
 	export let path;

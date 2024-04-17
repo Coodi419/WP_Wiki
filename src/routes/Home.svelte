@@ -1,9 +1,9 @@
 <script>
-	import Header from '.././components/Header.svelte'
-	import Nav from '.././components/Nav.svelte'
-	import Aside from '.././components/Aside.svelte';
-	import Footer from '.././components/Footer.svelte';
-	import Section from '.././components/Section.svelte';
+	import Header from '../components/Home/Header.svelte'
+	import Nav from '../components/Home/Nav.svelte'
+	import Aside from '../components/Home/Aside.svelte';
+	import Footer from '../components/Home/Footer.svelte';
+	import Section from '../components/Home/Section.svelte';
 	import Search_bar from './../components/Search_bar.svelte';
 
 	export let path = undefined;
