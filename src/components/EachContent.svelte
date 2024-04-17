@@ -45,7 +45,7 @@
                             {:else if (splitFootnote.length === 2)}
                                 {@const textFootnote = dictFootnotesText[splitFootnote[1]]}
                                 {@const countFootnote = 1} {--textFootnote[1]}
-                                <a href="#bottom_footnote_{splitFootnote[0]}" id="{textFootnote[0]}-{textFootnote[2] - countFootnote}" class="footnote text_content"> <sup> [{splitFootnote[1]}] </sup> </a>
+                                <a href="#bottom_footnote_{splitFootnote[1]}" id="{textFootnote[0]}-{textFootnote[2] - countFootnote}" class="footnote text_content"> <sup> [{splitFootnote[1]}] </sup> </a>
 
                             {/if}
                         {/if}
@@ -78,7 +78,7 @@
                         {:else if (splitFootnote.length === 2)}
                             {@const textFootnote = dictFootnotesText[splitFootnote[1]]}
                             {@const countFootnote = --textFootnote[1]}
-                            <a href="#bottom_footnote_{splitFootnote[0]}" id="{textFootnote[0]}-{textFootnote[2] - countFootnote}" class="footnote text_content"> <sup> [{splitFootnote[1]}] </sup> </a>
+                            <a href="#bottom_footnote_{splitFootnote[1]}" id="{textFootnote[0]}-{textFootnote[2] - countFootnote}" class="footnote text_content"> <sup> [{splitFootnote[1]}] </sup> </a>
                         {/if}
                     {/if}
                 {/if}
