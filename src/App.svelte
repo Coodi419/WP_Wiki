@@ -38,7 +38,7 @@
     <Router {url}>
         <Route path = "/" component={Home} requestWrite={''} {request}></Route>
         <Route path = "/login" component={Login} requestWrite={''}></Route>
-        <Route path = "/editscreen" component={EditScreen} requestWrite={''}></Route>
+        <Route path = "/edit/*path" component={EditScreen} requestWrite={''}></Route>
         <Route path = "/history" component={History} requestWrite={''}></Route>
         <Route path= "/w/*path" component={Home} requestWrite={''}> {request}</Route>
     </Router>

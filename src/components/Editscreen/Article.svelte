@@ -1,8 +1,41 @@
+<script>
+    import main from "../../main.js";
+
+    export let path = '';
+    export let writeOutput = {data: {content: ''}};
+
+    let mainText = writeOutput.data.content;
+    let message = '';
+
+	async function postForm(){
+        const objectForm = {
+            content: mainText,
+            message: message,
+            path: path,
+        }
+        const url = 'write/edit_archive'
+
+        fetch(`/${url}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objectForm)
+        })
+        .then(response => {
+            console.log('complete')
+        })
+        .catch(error => {
+          console.log('error');
+        });
+    }
+</script>
+
 <article>
     <div id="Edit_headline">
         <div class="Edit_title_div">
             <h1 class="Edit_title">
-                <a href="/">박도현/3학년 4반</a>
+                <a href="/{path}">{path}</a>
             </h1>
         </div>
         <div class="Edit_buttons">
@@ -27,7 +60,7 @@
     </div>
     <div id="Edit_main">
         <div>
-            <form method="post" enctype="multipart/form-data" class="Edit_from">
+            <form class="Edit_from" on:submit|preventDefault={postForm}>
                 <ul>
                     <li>
                         <button type="button" class="osong_button">편집기</button>
@@ -49,15 +82,15 @@
                     </li>
                 </ul>
                 <div class="Edit_window">
-                    <textarea class="Text_box"></textarea>
+                    <textarea class="Text_box" name="edit" bind:value={mainText}></textarea>
                 </div>
                 <div class="logInput_div">
                     <label for="logInput">요약</label>
-                    <input type="text" id="logInput" name="log">
+                    <input type="text" id="logInput" name="log" bind:value={message}>
                 </div>
                 <label class="edit_agree">
                     <input type="checkbox" name="agree" value="Y" class="Edit_agree_checkbox">
-                    <span class="edit_agree_span">
+                    <span class="edit_agree_span"> <!-- TODO: 특정 권한 가진 사람만 보이는 권한 설정칸 만들기 -->
                         문서 편집을 
                         <strong>저장</strong>
                         하면 당신은 기여한 내용을 
@@ -67,7 +100,7 @@
                     </span>
                 </label>
                 <span data-v-5d316e06="">편집 요청은 편집 권한이 있는 사용자가 승인할 수 있습니다. 편집 권한이 있는 사용자가 확인 할 수 있도록 편집 내용을 뒷받침할 수 있는 출처 또는 근거를 타 사용자가 확인 가능하도록 편집 요약에 입력해 주세요.<br><a href="https://namu.wiki/w/%EB%82%98%EB%AC%B4%EC%9C%84%ED%82%A4:%EA%B8%B0%EB%B3%B8%EB%B0%A9%EC%B9%A8/%EB%AC%B8%EC%84%9C%20%EA%B4%80%EB%A6%AC%20%EB%B0%A9%EC%B9%A8#s-1.2.1"><b>문서 관리 방침</b></a>에서는 <span style="color: red; text-decoration: underline; font-weight: bold;">정당한 사유가 기재되지 않은 편집 요청에 대해서 관리자 직권으로 닫기 처리</span>할 수 있도록 규정하고 있습니다. 편집 요청 시에는 편집 요약을 통해 근거를 포함하시는 것을 강력하게 권장합니다.</span>
-                <button class="Save_button">저장</button>
+                <button class="Save_button" type="submit">저장</button>
             </form>
             <div></div>
         </div>
