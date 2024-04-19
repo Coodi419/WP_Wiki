@@ -3,7 +3,7 @@
         '', '', '', '', ''
     ]
 
-    const 유도현병신장애인 = true;
+    const 문서수정횟수 = 1;
 </script>
 
 <article>
@@ -47,7 +47,7 @@
                         </span>
                         <input data-v-29e095ff="" type="radio" name="rev" value="680" style="visibility: visible;">
                         <input data-v-29e095ff="" type="radio" name="rev" value="680" style="visibility: visible;">
-                        <strong>r&#40;문서수정횟수&#41;</strong>
+                        <strong>r&#40;{문서수정횟수}&#41;</strong>
                         <span>&#40;개인수정개수&#41;</span>
                         <div aria-describedby="popover_tzwv0p6jql" class="trigger" style="display: inline-block;"><a class="JlqMeHuq">User_name</a></div>
                         &#40;
