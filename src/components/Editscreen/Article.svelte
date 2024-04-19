@@ -26,7 +26,7 @@
             console.log('complete')
         })
         .catch(error => {
-          console.log('error');
+          alert('error');
         });
     }
 </script>

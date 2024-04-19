@@ -12,35 +12,15 @@
     export let url = "";
     let number;
     let inputNumber;
-
-    function replacer(key, value) {
-        if (typeof(value) === 'string') {
-            return undefined;
-        }
-        return value;
-    }
-
-    const request = async (endpoint, formJson) => {
-        const resp = await fetch(`http://localhost:8000/${endpoint}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            },
-            body: JSON.stringify(formJson, replacer)
-        });
-
-        const result = await resp.json();
-        return result.data;
-    };
 </script>
   
 <main>
     <Router {url}>
-        <Route path = "/" component={Home} requestWrite={''} {request}></Route>
+        <Route path = "/" component={Home} requestWrite={''}></Route>
         <Route path = "/login" component={Login} requestWrite={''}></Route>
         <Route path = "/edit/*path" component={EditScreen} requestWrite={''}></Route>
         <Route path = "/history" component={History} requestWrite={''}></Route>
-        <Route path= "/w/*path" component={Home} requestWrite={''}> {request}</Route>
+        <Route path= "/w/*path" component={Home} requestWrite={''}></Route>
     </Router>
 </main>
 

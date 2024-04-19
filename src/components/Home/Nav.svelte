@@ -1,18 +1,18 @@
 <script>
     export let writeOutput = {};
+
+    const Categories = writeOutput.data.category.split('|')
+    const lastCategory = Categories.pop()
 </script>
 
 <nav style="display: flex">
     <p class="this_ryu">분류:&nbsp;</p>
-    {#if (1)}
-        {@const Categories = writeOutput.data.category.split('|')}
-        {@const lastCategory = Categories.pop()}
-        {#each Categories as category} <!-- fetch 결과의 데이터 개수만큼 반복 실행 -->
-            <a class="this_ryu" href="/w/분류:{category}">{category}</a>
-            <div>&nbsp;|&nbsp;</div>
-        {/each}
-        <a class="this_ryu" href="/w/분류:{lastCategory}">{lastCategory}</a>
-    {/if}
+
+    {#each Categories as category} <!-- fetch 결과의 데이터 개수만큼 반복 실행 -->
+        <a class="this_ryu" href="/w/분류:{category}">{category}</a>
+        <div>&nbsp;|&nbsp;</div>
+    {/each}
+    <a class="this_ryu" href="/w/분류:{lastCategory}">{lastCategory}</a>
 </nav>
 
 <style>

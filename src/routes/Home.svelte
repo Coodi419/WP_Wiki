@@ -7,40 +7,70 @@
 	import Search_bar from './../components/Search_bar.svelte';
 
 	export let path = undefined;
+	let hiddenButton = false;
+	let temp;
 
 	if (path === '') { window.location.href = "/"; }
 	
 	async function getWrite(){
 		if (path === undefined) {
-			const res = await fetch(`/main`, {method: 'POST'});
+			const res = await fetch(`/write/main?hb=${hiddenButton}`, {method: 'POST'});
 			const json = await res.json();
 			path = json.data.path;
 			return json
 		}
 		else {
-			const res = await fetch(`/write/output?path=${path}`, {method: 'POST'});
+			const res = await fetch(`/write/output?path=${path}&hb=${hiddenButton}`, {method: 'POST'});
 			const json = await res.json();
-			return JSON.parse(json)
+			return json
 		}
 	}
-    let writeOutputPromise = getWrite();
+	let writeOutputPromise = getWrite();
+
+	async function getUser() {
+		const res = await fetch("/user/information", { method: "POST",})
+		const json = await res.json();
+		return json
+	}
+	const UserOutputPromise = getUser();
+	$: {
+		writeOutputPromise = getWrite();
+		hiddenButton;
+	}
 </script>
 <main>
-	<Search_bar></Search_bar>
+	{#await UserOutputPromise}
+		<div></div>
+	{:then UserOutput}
+		<Search_bar bind:hidden={hiddenButton} UserOutput="{UserOutput}"></Search_bar>
+	{/await}
 	<div id="contents">
 		{#await writeOutputPromise}
 			<div></div>
 		{:then writeOutput}
-			{@const matchesParagraph = [...writeOutput.data.content.matchAll(/\[\[H[2-4]:([^\[\]]*)\]\]/g)]}
-			<Header path={path} writeOutput="{writeOutput}"/>
-			<Nav writeOutput="{writeOutput}"/>
-			{#if matchesParagraph.length !== 0}
-				<Aside matchesParagraph="{matchesParagraph}"/>
-			{/if}
-			<Section writeOutput="{writeOutput}" matchesParagraph="{matchesParagraph}"/>
-			<Footer/>
+			{#await UserOutputPromise}
+				<div></div>
+			{:then UserOutput}
+				{@const matchesParagraph = [...writeOutput.data.content.matchAll(/\[\[H[2-4]:([^\[\]]*)\]\]/g)]}
+
+				{#if writeOutput.success}
+					<Header path={path} writeOutput="{writeOutput}" UserOutput="{UserOutput}"/>
+					<Nav writeOutput="{writeOutput}"/>
+					{#if matchesParagraph.length !== 0}
+						<Aside matchesParagraph="{matchesParagraph}"/>
+					{/if}
+					<Section writeOutput="{writeOutput}" matchesParagraph="{matchesParagraph}"/>
+					<Footer/>
+				{:else}
+					<Header path={path} writeOutput="{writeOutput}" UserOutput="{UserOutput}"/>
+					<Section writeOutput="{writeOutput}" matchesParagraph="{matchesParagraph}"/>
+
+				{/if}
+			{/await}
 		{/await}
 	</div>
+
+	<button></button>
 </main>
 
 <style>

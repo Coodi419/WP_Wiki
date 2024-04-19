@@ -5,39 +5,6 @@
     export let writeOutput = {};
     export let matchesParagraph = [];
 
-    // window.onload = function () {
-    //     var e1_1 = document.getElementById("down_arrow_1");
-    //     var e1_2 = document.getElementById("headline_1");
-    //     var e2_1 = document.getElementById("down_arrow_2");
-    //     var e2_2 = document.getElementById("headline_2");
-    //     e1_1.onclick = function() {click_title("1")};
-    //     e1_2.onclick = function() {click_title("1")};
-    //     e2_1.onclick = function() {click_title("2")};
-    //     e2_2.onclick = function() {click_title("2")};
-    // }
-    // function click_title(n)  {
-    //     var headline_string = "headline_" + n;
-    //     var down_arrow_string = "down_arrow_" + n;
-    //     var num_string = "num_" + n;
-    //     var section_string = "section_" + n;
-    //     if(document.getElementById(down_arrow_string).name === "chevron-forward-outline")
-    //     {
-    //         document.getElementById(headline_string).style.color = "black";
-    //         document.getElementById(down_arrow_string).style.color = "black";
-    //         document.getElementById(down_arrow_string).name = "chevron-down-outline";
-    //         document.getElementById(num_string).style.color = "#0275d8";
-    //         document.getElementById(section_string).style.display = "block";
-    //     }
-    //     else
-    //     {
-    //         document.getElementById(headline_string).style.color = "#b3b3b3";
-    //         document.getElementById(down_arrow_string).style.color = "#b3b3b3";
-    //         document.getElementById(down_arrow_string).name = "chevron-forward-outline";
-    //         document.getElementById(num_string).style.color = "#80BAEB";
-    //         document.getElementById(section_string).style.display = "none";
-    //     }
-    // }
-
     function click_title(n)  {
         const headline_string = "headline_" + n;
         const down_arrow_string = "down_arrow_" + n;
@@ -62,34 +29,6 @@
             // document.getElementById(section_string).style.display = "none";
         }
     }
-
-    // function click_title(n)  {
-    //     const headline_string = "headline_" + n;
-    //     const down_arrow_string = "down_arrow_" + n;
-    //     const num_string = "num_" + n;
-    //     const section_string = "section_" + n;
-    //     if(document.getElementById(down_arrow_string).name === "chevron-forward-outline") {
-    //         document.getElementById(headline_string).style.color = "black";
-    //         document.getElementById(down_arrow_string).style.color = "black";
-    //         document.getElementById(down_arrow_string).name = "chevron-down-outline";
-    //         document.getElementById(num_string).style.color = "#0275d8";
-    //         for (let section of document.getElementsByClassName(section_string)) {section.style.display = "";}
-    //     }
-    //     else {
-    //         document.getElementById(headline_string).style.color = "#b3b3b3";
-    //         document.getElementById(down_arrow_string).style.color = "#b3b3b3";
-    //         document.getElementById(down_arrow_string).name = "chevron-forward-outline";
-    //         document.getElementById(num_string).style.color = "#80BAEB";
-    //         for (let section of document.getElementsByClassName(section_string)) {section.style.display = "none";}
-    //     }
-    // }
-
-    // function getLineNumber(text, index) {
-    //   const match = text.slice(0, index).match(/\n/g);
-    //   return (match ? match.length : 0) + 1;
-    // }
-
-
 
     const makeFinalHtml = (indexMatch, line, match, matches, nowGetParagraphNum) => {
         if (indexMatch === matches.length-1)

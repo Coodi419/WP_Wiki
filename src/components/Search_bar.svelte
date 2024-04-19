@@ -1,11 +1,28 @@
 <script>
+    export let UserOutput = {
+        data: {
+            authority: 999,
+        }
+    };
+    const minAuthority = 2;
+
     let searchLink = '';
+
+    const gotoLink = () => {
+        window.location.href = "/w/"+searchLink;
+        console.log(searchLink);
+    }
+
+    export let hidden = false;
+    const changeHidden = () => {
+        hidden = !hidden;
+    }
 </script>
 
 <div id="tool_bar">
     <div id="search_tool">
         <a href="/" title="아무 문서로 이동" class="random"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="random_icon" data-v-3070b92f=""><path d="M403.8 34.4c12-5 25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V160H352c-10.1 0-19.6 4.7-25.6 12.8L284 229.3 244 176l31.2-41.6C293.3 110.2 321.8 96 352 96h32V64c0-12.9 7.8-24.6 19.8-29.6zM164 282.7L204 336l-31.2 41.6C154.7 401.8 126.2 416 96 416H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c10.1 0 19.6-4.7 25.6-12.8L164 282.7zm274.6 188c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V416H352c-30.2 0-58.7-14.2-76.8-38.4L121.6 172.8c-6-8.1-15.5-12.8-25.6-12.8H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c30.2 0 58.7 14.2 76.8 38.4L326.4 339.2c6 8.1 15.5 12.8 25.6 12.8h32V320c0-12.9 7.8-24.6 19.8-29.6s25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64z"></path></svg></a>
-        <form class="search_bar" onsubmit='return false;'> <!-- TODO: 엔터 해서 redirect 되면 하고 말면 말고 sveltekit이였으면 했다 -->
+        <form class="search_bar" on:submit|preventDefault='{gotoLink}'>
             <input type="search" bind:value={searchLink} placeholder="여기에서 검색" autocomplete="off" spellcheck="false" tabindex="1" id="search_place" data-v-3070b92f="">
             <a href="/w/{searchLink}" title="검색" class="random"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" id="random_icon" data-v-3070b92f=""><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg></a>
             <a href="/w/{searchLink}" title="이동" class="random"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" id="random_icon" data-v-3070b92f=""><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg></a>
@@ -14,6 +31,9 @@
             <a href="/login" id="profile_button"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" id="profile_icon" data-v-c0860ca0="" data-v-76d6fdf5=""><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></a>
         </div>
     </div>
+    {#if (UserOutput.data.authority <= minAuthority)}
+        <a class="hidden" on:click={changeHidden}><ion-icon name="skull-outline"></ion-icon></a>
+    {/if}
 </div>
 
 <style>
@@ -143,4 +163,19 @@
 			max-width: none;
 		}
 	}
+
+    .hidden {
+        border-left-width: 0;
+        margin: 0;
+        height: 1.75em;
+        align-items: center;
+        background-color: #fff;
+        border: 1px solid #dadada;
+        color: rgb(33, 37, 41, .749);
+        justify-content: center;
+        display: flex;
+        padding: 0.25rem 0.75rem;
+        text-decoration: none;
+        cursor: pointer;
+    }
 </style>

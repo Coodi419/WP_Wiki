@@ -8,7 +8,7 @@
 		console.log(path);
 		const res = await fetch(`/write/output?path=${path}`, {method: 'POST'});
 		const json = await res.json();
-		return JSON.parse(json)
+		return json
 	}
     let writeOutputPromise = getWrite();
 </script>
