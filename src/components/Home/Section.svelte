@@ -5,39 +5,6 @@
     export let writeOutput = {};
     export let matchesParagraph = [];
 
-    // window.onload = function () {
-    //     var e1_1 = document.getElementById("down_arrow_1");
-    //     var e1_2 = document.getElementById("headline_1");
-    //     var e2_1 = document.getElementById("down_arrow_2");
-    //     var e2_2 = document.getElementById("headline_2");
-    //     e1_1.onclick = function() {click_title("1")};
-    //     e1_2.onclick = function() {click_title("1")};
-    //     e2_1.onclick = function() {click_title("2")};
-    //     e2_2.onclick = function() {click_title("2")};
-    // }
-    // function click_title(n)  {
-    //     var headline_string = "headline_" + n;
-    //     var down_arrow_string = "down_arrow_" + n;
-    //     var num_string = "num_" + n;
-    //     var section_string = "section_" + n;
-    //     if(document.getElementById(down_arrow_string).name === "chevron-forward-outline")
-    //     {
-    //         document.getElementById(headline_string).style.color = "black";
-    //         document.getElementById(down_arrow_string).style.color = "black";
-    //         document.getElementById(down_arrow_string).name = "chevron-down-outline";
-    //         document.getElementById(num_string).style.color = "#0275d8";
-    //         document.getElementById(section_string).style.display = "block";
-    //     }
-    //     else
-    //     {
-    //         document.getElementById(headline_string).style.color = "#b3b3b3";
-    //         document.getElementById(down_arrow_string).style.color = "#b3b3b3";
-    //         document.getElementById(down_arrow_string).name = "chevron-forward-outline";
-    //         document.getElementById(num_string).style.color = "#80BAEB";
-    //         document.getElementById(section_string).style.display = "none";
-    //     }
-    // }
-
     function click_title(n)  {
         const headline_string = "headline_" + n;
         const down_arrow_string = "down_arrow_" + n;
@@ -62,34 +29,6 @@
             // document.getElementById(section_string).style.display = "none";
         }
     }
-
-    // function click_title(n)  {
-    //     const headline_string = "headline_" + n;
-    //     const down_arrow_string = "down_arrow_" + n;
-    //     const num_string = "num_" + n;
-    //     const section_string = "section_" + n;
-    //     if(document.getElementById(down_arrow_string).name === "chevron-forward-outline") {
-    //         document.getElementById(headline_string).style.color = "black";
-    //         document.getElementById(down_arrow_string).style.color = "black";
-    //         document.getElementById(down_arrow_string).name = "chevron-down-outline";
-    //         document.getElementById(num_string).style.color = "#0275d8";
-    //         for (let section of document.getElementsByClassName(section_string)) {section.style.display = "";}
-    //     }
-    //     else {
-    //         document.getElementById(headline_string).style.color = "#b3b3b3";
-    //         document.getElementById(down_arrow_string).style.color = "#b3b3b3";
-    //         document.getElementById(down_arrow_string).name = "chevron-forward-outline";
-    //         document.getElementById(num_string).style.color = "#80BAEB";
-    //         for (let section of document.getElementsByClassName(section_string)) {section.style.display = "none";}
-    //     }
-    // }
-
-    // function getLineNumber(text, index) {
-    //   const match = text.slice(0, index).match(/\n/g);
-    //   return (match ? match.length : 0) + 1;
-    // }
-
-
 
     const makeFinalHtml = (indexMatch, line, match, matches, nowGetParagraphNum) => {
         if (indexMatch === matches.length-1)
@@ -130,7 +69,7 @@
 
     const matchesFootnotes = [...content.matchAll(/\[\[F:([^\[\]]*)\]\]/g)];
     let dictFootnotesText = {  // TODO: 이거 해결 어떻게 해야 본문에 넣을까?
-        // 글자: [숫자, [번호1, 번호2 ..], 텍스트] <- 글자인 경우 첫번째 텍스트만 반영
+        // 글자: [숫자, 남은갯수, 갯수, 텍스트] <- 글자인 경우 첫번째 텍스트만 반영
         // 숫자: 텍스트
     };
 
@@ -155,11 +94,12 @@
         else if (splitMatch.length === 2) {
             if (dictFootnotesText[splitMatch[1]] === undefined) {
                 listFootnotesText.push(splitMatch[1])
-                dictFootnotesText[splitMatch[1]] = [++countFootnote, 1, splitMatch[0]];
+                dictFootnotesText[splitMatch[1]] = [++countFootnote, 1, 1, splitMatch[0]];
                 dictTextToFootnote[splitMatch[0]] = countFootnote;
             }
             else {
-                dictFootnotesText[splitMatch[1]][1] += 1
+                dictFootnotesText[splitMatch[1]][1]++
+                dictFootnotesText[splitMatch[1]][2]++
             }
         }
     }
@@ -208,13 +148,17 @@
 
         {#each listFootnotesText as footnote}
             {#if isNaN(footnote)}
+                {@const numberFootnote = dictFootnotesText[footnote][0]}
                 <div id="bottom_footnote_{footnote}">
-                    <a style="color: darkgoldenrod">[{footnote}]</a>
-                    <span>&nbsp;{dictFootnotesText[footnote][2]}</span>
+                    <span>[{footnote}]</span>
+                    {#each {length: dictFootnotesText[footnote][2]} as _, index}
+                        <sup><a href="#{numberFootnote}-{index+1}" class="footnote">{numberFootnote}.{index+1}&nbsp;</a></sup>
+                    {/each}
+                    <span>{dictFootnotesText[footnote][3]}</span>
                 </div>
             {:else}
                 <div id="bottom_footnote_{footnote}">
-                    <a style="color: darkgoldenrod">[{footnote}]</a>
+                    <a href="#{footnote}" class="footnote">[{footnote}]</a>
                     <span>&nbsp;{dictFootnotesText[footnote]}</span>
                 </div>
             {/if}
@@ -264,10 +208,6 @@
     }
 
     .footnote {
-        color:yellow;
-    }
-
-    .footnote:hover {
-      background-color: bisque;
+        color: darkgoldenrod;
     }
 </style>

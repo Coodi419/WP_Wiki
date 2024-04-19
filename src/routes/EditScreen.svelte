@@ -1,12 +1,27 @@
 <script>
 	import Article from '../components/Editscreen/Article.svelte';
 	import Search_bar from './../components/Search_bar.svelte';
+
+	export let path = '';
+
+	async function getWrite(){
+		console.log(path);
+		const res = await fetch(`/write/output?path=${path}`, {method: 'POST'});
+		const json = await res.json();
+		return json
+	}
+    let writeOutputPromise = getWrite();
 </script>
 <main>
 	<Search_bar></Search_bar>
-	<div id="contents">
-		<Article></Article>
-	</div>
+	{#await writeOutputPromise}
+		<div id="contents"> </div>
+	{:then writeOutput}
+		<div id="contents">
+			<Article path="{path}" writeOutput="{writeOutput}"></Article>
+		</div>
+	{/await}
+
 </main>
 
 <style>

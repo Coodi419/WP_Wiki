@@ -3,10 +3,13 @@
 
     export let splitContent = '';
     export let dictTextToFootnote = {};
+    export let dictFootnotesText = {};
 
     const matchesContent = [...splitContent.matchAll(/\[\[([^\[\]]*)\]\]/g)]
 
-    let font_size = 14;
+    let fontsize = 14;
+
+    // TODO: font-size : calc(var(--fontsize ) * 1px); 이렇게 css로 font-size 보내기
 </script>
 
 <div class="contentdiv">
@@ -37,9 +40,13 @@
                         {:else if (splitMatchContent[0] === 'F')} <!-- TODO: 미완성 -->
                             {@const splitFootnote = splitMatchContent[1].split('|')}
                             {#if (splitFootnote.length === 1)}
-                                <a href="#bottom_footnote_{dictTextToFootnote[splitFootnote[0]]}" class="footnote text_content"> <sup> [{dictTextToFootnote[splitFootnote[0]]}] </sup> </a>
+                                {@const numberParagraph = dictTextToFootnote[splitFootnote[0]]}
+                                <a href="#bottom_footnote_{numberParagraph}" class="footnote text_content"> <sup> [{numberParagraph}] </sup> </a>
                             {:else if (splitFootnote.length === 2)}
-                                <a href="#bottom_footnote_{splitFootnote[1]}" class="footnote text_content"> <sup> [{splitFootnote[1]}] </sup> </a>
+                                {@const textFootnote = dictFootnotesText[splitFootnote[1]]}
+                                {@const countFootnote = 1} {--textFootnote[1]}
+                                <a href="#bottom_footnote_{splitFootnote[1]}" id="{textFootnote[0]}-{textFootnote[2] - countFootnote}" class="footnote text_content"> <sup> [{splitFootnote[1]}] </sup> </a>
+
                             {/if}
                         {/if}
                     {/if}
@@ -54,6 +61,7 @@
                 {:else}
                     {#if (splitMatchContent[0] === 'L')}
                         {@const splitLink = splitMatchContent[1].split('|')}
+                        <!-- {@const isExistUrl = } -->
                         {#if (splitLink.length === 1)}
                             <a href="{splitLink[0]}" class="text_content">{splitLink[0]}</a>
                         {:else if (splitLink.length === 2)}
@@ -65,9 +73,12 @@
                     {:else if (splitMatchContent[0] === 'F')}
                         {@const splitFootnote = splitMatchContent[1].split('|')}
                         {#if (splitFootnote.length === 1)}
-                            <a href="#bottom_footnote_{dictTextToFootnote[splitFootnote[0]]}" class="footnote text_content"> <sup> [{dictTextToFootnote[splitFootnote[0]]}] </sup> </a>
+                            {@const numberParagraph = dictTextToFootnote[splitFootnote[0]]}
+                            <a href="#bottom_footnote_{numberParagraph}" class="footnote text_content"> <sup> [{numberParagraph}] </sup> </a>
                         {:else if (splitFootnote.length === 2)}
-                            <a href="#bottom_footnote_{splitFootnote[1]}" class="footnote text_content"> <sup> [{splitFootnote[1]}] </sup> </a>
+                            {@const textFootnote = dictFootnotesText[splitFootnote[1]]}
+                            {@const countFootnote = --textFootnote[1]}
+                            <a href="#bottom_footnote_{splitFootnote[1]}" id="{textFootnote[0]}-{textFootnote[2] - countFootnote}" class="footnote text_content"> <sup> [{splitFootnote[1]}] </sup> </a>
                         {/if}
                     {/if}
                 {/if}
@@ -84,8 +95,12 @@
         color: darkgoldenrod;
     }
 
+    a.footnote {
+        text-decoration: none;
+    }
+
     .text_content {
-        font-size: 14;
+        font-size: 14px;
     }
 
     .contentdiv {

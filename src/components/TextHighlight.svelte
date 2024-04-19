@@ -21,8 +21,6 @@
         // console.log('func:', textTag)
         return textTag
     }
-
-    console.log(splitMatchContent);
 </script>
 
 <span class="text_content">
