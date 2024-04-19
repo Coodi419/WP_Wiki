@@ -1,3 +1,11 @@
+<script>
+    const histories = [
+        '', '', '', '', ''
+    ]
+
+    const 유도현병신장애인 = true;
+</script>
+
 <article>
     <div id="Edit_headline">
         <div class="Edit_title_div">
@@ -23,10 +31,87 @@
         </div>
     </div>
     <div id="History_main">
-        
+        <form class="history_form">
+            <div class="trans_buttons">
+                <a href="/" class="arrow_button"><ion-icon name="chevron-back-outline" class="icon"></ion-icon>Prev</a>
+                <a href="/" class="arrow_button">Next<ion-icon name="chevron-forward-outline" class="icon"></ion-icon></a>
+            </div>
+            <ul class="history_ul">
+                {#each {length: histories.length} as _, index}
+                    <li class="history_li">
+                        <time datetime="2024-03-23T11:08:24.000Z">2024-04-19 11:18:20</time>
+                        <span class="history_RAW">
+                            &#40;
+                            <a href="" class="a_RAW">RAW</a>
+                            &#41;
+                        </span>
+                        <input data-v-29e095ff="" type="radio" name="rev" value="680" style="visibility: visible;">
+                        <input data-v-29e095ff="" type="radio" name="rev" value="680" style="visibility: visible;">
+                        <strong>r&#40;문서수정횟수&#41;</strong>
+                        <span>&#40;개인수정개수&#41;</span>
+                        <div aria-describedby="popover_tzwv0p6jql" class="trigger" style="display: inline-block;"><a class="JlqMeHuq">User_name</a></div>
+                        &#40;
+                        <span class="memo"></span>
+                        &#41;
+                    </li>
+                {/each}
+            </ul>
+            <div class="trans_buttons">
+                <a href="/" class="arrow_button"><ion-icon name="chevron-back-outline" class="icon"></ion-icon>Prev</a>
+                <a href="/" class="arrow_button">Next<ion-icon name="chevron-forward-outline" class="icon"></ion-icon></a>
+            </div>
+        </form>
     </div>
 </article>
 <style>
+    .marker {
+        font-variant-numeric: tabular-nums;
+        text-transform: none;
+        cursor: default;
+        text-indent: 0px !important;
+        font-size: 20px !important;
+        text-align: start !important;
+        text-align-last: start !important;
+        padding-right: 5px;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
+    }
+    .history_RAW {
+        font-size: 10.5px;
+    }
+    .history_form {
+        display: block;
+    }
+    .a_RAW{
+        color: #0A88E3 ;
+    }
+    .history_ul {
+        display: block;
+        list-style-type: disc;
+        margin-block-end: 6px;
+        margin-block-start: 6px;
+        margin-bottom: 6px;
+        margin-inline-end: 0px;
+        margin-inline-start: 22.5px;
+        margin-left: 22.5px;
+        margin-right: 0px;
+        margin-top: 6px;
+        padding-inline-start: 8px;
+        padding-left: 8px;
+        font-size: 14.4px;
+        unicode-bidi: isolate;
+        content: '';
+        display: block;
+        clear: left;
+    }
+    .history_li {
+        display: list-item;
+        list-style-image: none;
+        list-style-position: outside;
+        list-style-type: disc;
+    }
     #History_main {
         display: block;
         unicode-bidi: isolate;
@@ -47,12 +132,73 @@
 		border-bottom: 0;
 		border-right-width: 0;
 		border-left-width: 0;
+        text-wrap: balance;
+        visibility: visible;
 	}
     h1, h2 {
         width: auto;
     }
-
-
+    .icon{
+        color: #666;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.8em;
+        text-align: center;
+        width: 0.9em;
+        cursor: pointer;
+        margin: 0;
+        contain: strict;
+        height: 15px;
+    }
+    .arrow_button
+    {
+        background-color: rgb(255,255,255);
+        border-color: rgb(204, 204, 204);
+        border-width: 0.666667px;
+        border-style: solid;
+        cursor: pointer;
+        display: block;
+        font-size: 14.4px;
+        text-align: center;
+        margin: 0;
+        padding: 3.2px;
+        padding-left: 7.2px;
+        padding-right: 7.2px;
+        text-wrap: nowrap;
+        vertical-align: middle;
+        text-decoration: none;
+        text-decoration-line: none !important;
+        float: left;
+        touch-action: manipulation;
+        user-select: none;
+    }
+    .arrow_button:hover
+    {
+        background-color: #E6E6E6;
+        border-color: rgb(204, 204, 204);
+        border-width: 0.666667px;
+        border-style: solid;
+        cursor: pointer;
+        display: block;
+        font-size: 14.4px;
+        text-align: center;
+        margin: 0;
+        padding: 3.2px;
+        padding-left: 7.2px;
+        padding-right: 7.2px;
+        text-wrap: nowrap;
+        vertical-align: middle;
+        text-decoration: none;
+        text-decoration-line: none !important;
+        float: left;
+        touch-action: manipulation;
+        user-select: none;
+    }
+    .trans_buttons {
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+    }
     #logInput {
         appearance: auto;
         background-color: rgb(255, 255, 255);
@@ -238,37 +384,6 @@
     }
     a:hover {
         text-decoration: underline;
-    }
-    ul {
-        border-bottom: 1px solid #ddd;
-        height: 36px;
-        list-style: none;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding-left: 0;
-        display: block;
-        list-style-image: none;
-        list-style-position: outside;
-        list-style-type: none;
-        margin-block-end: 0px;
-        margin-block-start: 0px;
-        margin-bottom: 0px;
-        margin-inline-end: 0px;
-        margin-inline-start: 0px;
-        margin-top: 0px;
-        padding-inline-start: 0px;
-        padding-left: 0px;
-        tab-size: 4;
-    }
-    li {
-        float: left;
-        list-style-image: none;
-        list-style-position: outside;
-        list-style-type: none;
-        margin-bottom: -1px;
-        text-align: left;
-        text-size-adjust: 100%;
-        unicode-bidi: isolate;
     }
     .osong_button {
         align-items: flex-start;
