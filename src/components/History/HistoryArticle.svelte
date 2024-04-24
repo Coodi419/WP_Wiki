@@ -3,10 +3,23 @@
         '', '', '', '', ''
     ]
 
-    const 문서수정횟수 = 1;
+    const 문서수정횟수 = 1; 
+
+    let visible = "hidden";
+    let annotation_x=50;
+    let annotation_y=99;
+    let annotation_content="도현이는 정상이 하나도 없다";
+    let link_id=1;
+    function onMouse() {
+        visible = "visible"
+    }
+    function outMouse() {
+        visible = "hidden" 
+    }
 </script>
 
 <article>
+    <a href="#fn-1" on:mouseenter={onMouse} on:mouseleave={outMouse} class="annotation"><span id="rfn-1">[1]</span></a>
     <div id="Edit_headline">
         <div class="Edit_title_div">
             <h1 class="Edit_title">
@@ -62,8 +75,101 @@
             </div>
         </form>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <span id="fn-1"><a href="#rfn-1" class="annotation">[1]</a></span>
+    <div class="popper" x-placement="top" style="position: absolute; will-change: top, left; top: {annotation_y}; left: {annotation_x}; visibility: {visible};" on:mouseenter={onMouse} on:mouseleave={outMouse}> 
+        <div class="popper__arrow" style="left: {annotation_x/2+16};"></div><div class="popper__inner">
+            <a href="#fn-{link_id}" class="annotation">[{link_id}]</a>
+            {annotation_content}
+        </div>
+    </div>
 </article>
 <style>
+    .popper {
+        background-attachment: scroll;
+        background-clip: border-box;
+        background-color: #fff;
+        background-image: none;
+        background-origin: padding-box;
+        background-position-x: 0%;
+        background-position-y: 0%;
+        background-repeat: repeat;
+        background-size: auto;
+        color: rgb(33, 37, 41);
+        box-shadow: 0 0 2px hsla(0, 0%, 100%, .5);
+        border-radius: 3px;
+        max-width: 50%;
+        padding: 15px;
+        word-break: break-all;
+        box-sizing: border-box;
+        z-index: 510;
+    }
+    .popper_arrow {
+        border-bottom-color: transparent;
+        border-bottom-style: solid;
+        border-bottom-width: 0px;
+        border-left-color: transparent;
+        border-left-style: solid;
+        border-left-width: 5px;
+        border-right-color: transparent;
+        border-right-style: solid;
+        border-right-width: 5px;
+        border-top-color: rgb(221, 221, 221);
+        border-top-style: solid;
+        border-top-width: 5px;
+        bottom: -5px;
+        box-sizing: border-box;
+        color: rgb(33, 37, 41);
+        color-scheme: light;
+        display: block;
+        height: 5px;
+        line-height: 22.5px;
+        margin-bottom: 0;
+        margin-top: 0;
+        margin-left: 5px;
+        margin-right: 5px;
+        position: absolute;
+        tab-size: 4;
+        text-size-adjust: 100%;
+        unicode-bidi: isolate;
+        width: 10px;
+        word-break: break-all;
+    }
+    .popper_inner {
+        display: block;
+        font-size: 15px;
+    }
+    .annotation {
+        color: #0275d8;
+        text-decoration: none;
+    }
     .marker {
         font-variant-numeric: tabular-nums;
         text-transform: none;
