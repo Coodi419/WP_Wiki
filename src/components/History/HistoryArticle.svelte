@@ -1,25 +1,4 @@
-<script>
-    const histories = [
-        '', '', '', '', ''
-    ]
-
-    const 문서수정횟수 = 1; 
-
-    let visible = "hidden";
-    let annotation_x=50;
-    let annotation_y=99;
-    let annotation_content="도현이는 정상이 하나도 없다";
-    let link_id=1;
-    function onMouse() {
-        visible = "visible"
-    }
-    function outMouse() {
-        visible = "hidden" 
-    }
-</script>
-
 <article>
-    <a href="#fn-1" on:mouseenter={onMouse} on:mouseleave={outMouse} class="annotation"><span id="rfn-1">[1]</span></a>
     <div id="Edit_headline">
         <div class="Edit_title_div">
             <h1 class="Edit_title">
@@ -44,180 +23,10 @@
         </div>
     </div>
     <div id="History_main">
-        <form class="history_form">
-            <div class="trans_buttons">
-                <a href="/" class="arrow_button"><ion-icon name="chevron-back-outline" class="icon"></ion-icon>Prev</a>
-                <a href="/" class="arrow_button">Next<ion-icon name="chevron-forward-outline" class="icon"></ion-icon></a>
-            </div>
-            <ul class="history_ul">
-                {#each {length: histories.length} as _, index}
-                    <li class="history_li">
-                        <time datetime="2024-03-23T11:08:24.000Z">2024-04-19 11:18:20</time>
-                        <span class="history_RAW">
-                            &#40;
-                            <a href="" class="a_RAW">RAW</a>
-                            &#41;
-                        </span>
-                        <input data-v-29e095ff="" type="radio" name="rev" value="680" style="visibility: visible;">
-                        <input data-v-29e095ff="" type="radio" name="rev" value="680" style="visibility: visible;">
-                        <strong>r&#40;{문서수정횟수}&#41;</strong>
-                        <span>&#40;개인수정개수&#41;</span>
-                        <div aria-describedby="popover_tzwv0p6jql" class="trigger" style="display: inline-block;"><a class="JlqMeHuq">User_name</a></div>
-                        &#40;
-                        <span class="memo"></span>
-                        &#41;
-                    </li>
-                {/each}
-            </ul>
-            <div class="trans_buttons">
-                <a href="/" class="arrow_button"><ion-icon name="chevron-back-outline" class="icon"></ion-icon>Prev</a>
-                <a href="/" class="arrow_button">Next<ion-icon name="chevron-forward-outline" class="icon"></ion-icon></a>
-            </div>
-        </form>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <span id="fn-1"><a href="#rfn-1" class="annotation">[1]</a></span>
-    <div class="popper" x-placement="top" style="position: absolute; will-change: top, left; top: {annotation_y}; left: {annotation_x}; visibility: {visible};" on:mouseenter={onMouse} on:mouseleave={outMouse}> 
-        <div class="popper__arrow" style="left: {annotation_x/2+16};"></div><div class="popper__inner">
-            <a href="#fn-{link_id}" class="annotation">[{link_id}]</a>
-            {annotation_content}
-        </div>
+        
     </div>
 </article>
 <style>
-    .popper {
-        background-attachment: scroll;
-        background-clip: border-box;
-        background-color: #fff;
-        background-image: none;
-        background-origin: padding-box;
-        background-position-x: 0%;
-        background-position-y: 0%;
-        background-repeat: repeat;
-        background-size: auto;
-        color: rgb(33, 37, 41);
-        box-shadow: 0 0 2px hsla(0, 0%, 100%, .5);
-        border-radius: 3px;
-        max-width: 50%;
-        padding: 15px;
-        word-break: break-all;
-        box-sizing: border-box;
-        z-index: 510;
-    }
-    .popper_arrow {
-        border-bottom-color: transparent;
-        border-bottom-style: solid;
-        border-bottom-width: 0px;
-        border-left-color: transparent;
-        border-left-style: solid;
-        border-left-width: 5px;
-        border-right-color: transparent;
-        border-right-style: solid;
-        border-right-width: 5px;
-        border-top-color: rgb(221, 221, 221);
-        border-top-style: solid;
-        border-top-width: 5px;
-        bottom: -5px;
-        box-sizing: border-box;
-        color: rgb(33, 37, 41);
-        color-scheme: light;
-        display: block;
-        height: 5px;
-        line-height: 22.5px;
-        margin-bottom: 0;
-        margin-top: 0;
-        margin-left: 5px;
-        margin-right: 5px;
-        position: absolute;
-        tab-size: 4;
-        text-size-adjust: 100%;
-        unicode-bidi: isolate;
-        width: 10px;
-        word-break: break-all;
-    }
-    .popper_inner {
-        display: block;
-        font-size: 15px;
-    }
-    .annotation {
-        color: #0275d8;
-        text-decoration: none;
-    }
-    .marker {
-        font-variant-numeric: tabular-nums;
-        text-transform: none;
-        cursor: default;
-        text-indent: 0px !important;
-        font-size: 20px !important;
-        text-align: start !important;
-        text-align-last: start !important;
-        padding-right: 5px;
-        -webkit-user-select:none;
-        -moz-user-select:none;
-        -ms-user-select:none;
-        user-select:none;
-    }
-    .history_RAW {
-        font-size: 10.5px;
-    }
-    .history_form {
-        display: block;
-    }
-    .a_RAW{
-        color: #0A88E3 ;
-    }
-    .history_ul {
-        display: block;
-        list-style-type: disc;
-        margin-block-end: 6px;
-        margin-block-start: 6px;
-        margin-bottom: 6px;
-        margin-inline-end: 0px;
-        margin-inline-start: 22.5px;
-        margin-left: 22.5px;
-        margin-right: 0px;
-        margin-top: 6px;
-        padding-inline-start: 8px;
-        padding-left: 8px;
-        font-size: 14.4px;
-        unicode-bidi: isolate;
-        content: '';
-        display: block;
-        clear: left;
-    }
-    .history_li {
-        display: list-item;
-        list-style-image: none;
-        list-style-position: outside;
-        list-style-type: disc;
-    }
     #History_main {
         display: block;
         unicode-bidi: isolate;
@@ -238,73 +47,12 @@
 		border-bottom: 0;
 		border-right-width: 0;
 		border-left-width: 0;
-        text-wrap: balance;
-        visibility: visible;
 	}
     h1, h2 {
         width: auto;
     }
-    .icon{
-        color: #666;
-        font-size: 15px;
-        font-weight: 400;
-        line-height: 1.8em;
-        text-align: center;
-        width: 0.9em;
-        cursor: pointer;
-        margin: 0;
-        contain: strict;
-        height: 15px;
-    }
-    .arrow_button
-    {
-        background-color: rgb(255,255,255);
-        border-color: rgb(204, 204, 204);
-        border-width: 0.666667px;
-        border-style: solid;
-        cursor: pointer;
-        display: block;
-        font-size: 14.4px;
-        text-align: center;
-        margin: 0;
-        padding: 3.2px;
-        padding-left: 7.2px;
-        padding-right: 7.2px;
-        text-wrap: nowrap;
-        vertical-align: middle;
-        text-decoration: none;
-        text-decoration-line: none !important;
-        float: left;
-        touch-action: manipulation;
-        user-select: none;
-    }
-    .arrow_button:hover
-    {
-        background-color: #E6E6E6;
-        border-color: rgb(204, 204, 204);
-        border-width: 0.666667px;
-        border-style: solid;
-        cursor: pointer;
-        display: block;
-        font-size: 14.4px;
-        text-align: center;
-        margin: 0;
-        padding: 3.2px;
-        padding-left: 7.2px;
-        padding-right: 7.2px;
-        text-wrap: nowrap;
-        vertical-align: middle;
-        text-decoration: none;
-        text-decoration-line: none !important;
-        float: left;
-        touch-action: manipulation;
-        user-select: none;
-    }
-    .trans_buttons {
-        display: inline-block;
-        position: relative;
-        vertical-align: middle;
-    }
+
+
     #logInput {
         appearance: auto;
         background-color: rgb(255, 255, 255);
@@ -490,6 +238,37 @@
     }
     a:hover {
         text-decoration: underline;
+    }
+    ul {
+        border-bottom: 1px solid #ddd;
+        height: 36px;
+        list-style: none;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding-left: 0;
+        display: block;
+        list-style-image: none;
+        list-style-position: outside;
+        list-style-type: none;
+        margin-block-end: 0px;
+        margin-block-start: 0px;
+        margin-bottom: 0px;
+        margin-inline-end: 0px;
+        margin-inline-start: 0px;
+        margin-top: 0px;
+        padding-inline-start: 0px;
+        padding-left: 0px;
+        tab-size: 4;
+    }
+    li {
+        float: left;
+        list-style-image: none;
+        list-style-position: outside;
+        list-style-type: none;
+        margin-bottom: -1px;
+        text-align: left;
+        text-size-adjust: 100%;
+        unicode-bidi: isolate;
     }
     .osong_button {
         align-items: flex-start;

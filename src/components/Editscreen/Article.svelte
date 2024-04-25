@@ -1,13 +1,18 @@
 <script>
     import main from "../../main.js";
+    const defaultUserAuth = 4;
 
     export let path = '';
-    export let writeOutput = {data: {content: ''}};
+    export let writeOutput = {data: {content: '', authority: defaultUserAuth}};
+    export let hidden = false;
 
-    let mainText = writeOutput.data.content;
+    let mainText;
+    if (writeOutput.success) {mainText = writeOutput.data.content;}
+    else {mainText='';}
+
     let message = '';
 
-	async function postForm(){
+	async function postForm(){  // TODO: 만약 권한 있으면 비밀의 버튼 Search_bar에 뜨게 해서, 누르면 숨겨진 글 수정할 수 있게 하기
         const objectForm = {
             content: mainText,
             message: message,
@@ -15,7 +20,7 @@
         }
         const url = 'write/edit_archive'
 
-        fetch(`/${url}`, {
+        fetch(`/${url}?hb=${hidden}`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -23,7 +28,9 @@
             body: JSON.stringify(objectForm)
         })
         .then(response => {
-            console.log('complete')
+            response.json().then( json => {
+                window.location.href = "/w/" + path;
+            })
         })
         .catch(error => {
           alert('error');
@@ -35,9 +42,10 @@
     <div id="Edit_headline">
         <div class="Edit_title_div">
             <h1 class="Edit_title">
-                <a href="/{path}">{path}</a>
+                <a href="/w/{path}">{path}</a>
             </h1>
         </div>
+        <span style="font: 14px"> hidden on </span>
         <div class="Edit_buttons">
             <div class="sort">
                 <a href="/backlink/Limbus%20Company/%EC%84%A0%ED%83%9D%EC%A7%80" class="Backbutton">

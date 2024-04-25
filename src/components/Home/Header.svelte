@@ -1,9 +1,12 @@
 <script>
     export let path = '';
-    export let writeOutput = {};
-    export let UserOutput = {};
+    export let writeOutput = {data: {authority: 2000}};
+    export let UserOutput = {data: {authority: 4}};
 
-    const authorityUser = UserOutput.data.authority;
+    let tempAuthorityUser;
+    if (UserOutput.success) { tempAuthorityUser =  UserOutput.data.authority; }
+    else { tempAuthorityUser =  4; }
+    const authorityUser = tempAuthorityUser;
     const authorityWrite = writeOutput.data.authority;
 
     const isEditable = Number(authorityWrite.toString()[authorityUser-1]) % 2
@@ -13,7 +16,7 @@
 <header>
     <div id="head_title">
         <div id="head_line_div">
-            <p id="title">{path}</p>
+            <p id="title">{path || '웹플위키:대문'}</p>
             <!-- <p id="time">최근 수정 시각: 2024-03-12 10:08:37</p> -->
             <!--{#await writeOutput} &lt;!&ndash; 동작 중일 때 처리 &ndash;&gt;-->
             <!--    <div></div>-->
