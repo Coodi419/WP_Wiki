@@ -9,8 +9,8 @@
     let searchLink = '';
 
     const gotoLink = () => {
+        // console.log(searchLink);
         window.location.href = "/w/"+searchLink;
-        console.log(searchLink);
     }
 
     export let hidden = false;
@@ -31,8 +31,10 @@
             <a href="/login" id="profile_button"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" id="profile_icon" data-v-c0860ca0="" data-v-76d6fdf5=""><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg></a>
         </div>
     </div>
-    {#if (UserOutput.data.authority <= minAuthority)}
-        <a class="hidden" on:click={changeHidden}><ion-icon name="skull-outline"></ion-icon></a>
+    {#if (UserOutput.success)}
+        {#if (UserOutput.data.authority <= minAuthority)}
+            <a class="hidden" on:click={changeHidden}><ion-icon name="skull-outline"></ion-icon></a>
+        {/if}
     {/if}
 </div>
 

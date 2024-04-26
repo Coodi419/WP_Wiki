@@ -10,22 +10,20 @@
 	let hiddenButton = false;
 	let temp;
 
-	if (path === '') { window.location.href = "/"; }
-	
+	if (path === '') { window.location.href = "/";}
+
+	let url;
+
+	let writeOutputPromise;
 	async function getWrite(){
-		if (path === undefined) {
-			const res = await fetch(`/write/main?hb=${hiddenButton}`, {method: 'POST'});
-			const json = await res.json();
-			path = json.data.path;
-			return json
-		}
-		else {
-			const res = await fetch(`/write/output?path=${path}&hb=${hiddenButton}`, {method: 'POST'});
-			const json = await res.json();
-			return json
-		}
+		if (hiddenButton) {url = `/write/output?path=${path}&hb=${hiddenButton}`}
+		else {url = `/write/output?path=${path}`}
+
+		const res = await fetch(url, {method: 'POST', mode: 'cors',});
+		const json = await res.json();
+		return json
 	}
-	let writeOutputPromise = getWrite();
+	writeOutputPromise = getWrite('');
 
 	async function getUser() {
 		const res = await fetch("/user/information", { method: "POST",})

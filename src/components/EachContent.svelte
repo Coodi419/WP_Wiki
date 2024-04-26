@@ -12,14 +12,27 @@
     // TODO: font-size : calc(var(--fontsize ) * 1px); 이렇게 css로 font-size 보내기
 </script>
 
-<div class="contentdiv">
+<div class="contentdiv">  <!-- TODO: 엔터 <br> 처리 -->
     {#if matchesContent.length === 0}
-        <span class="text_content"> {splitContent} </span>
+        {#each splitContent.split('\n') as content}
+            {#if (content === '')}
+                <div class="text_content"> <br> </div>
+            {:else}
+                <div class="text_content"> {content} </div>
+            {/if}
+        {/each}
     {:else}
         {#if (splitContent.length !== 0)}
             {#if matchesContent.length !== 0}
                 {@const lastContent = matchesContent[matchesContent.length-1]}
-                <span class="text_content">{splitContent.slice(0, matchesContent[0].index)}</span>
+                {#each splitContent.slice(0, matchesContent[0].index).split('\n') as firstContextSplit}
+                    <!-- <span class="text_content">{splitContent.slice(0, matchesContent[0].index)}</span> -->
+                    {#if firstContextSplit === ''}
+                        <span class="text_content"> <br> </span>
+                    {:else}
+                        <span class="text_content"> {firstContextSplit} </span>
+                    {/if}
+                {/each}
                 {#each {length: matchesContent.length-1} as _, countMatchContent}
                     {@const matchContent = matchesContent[countMatchContent]}
                     {@const splitMatchContent = matchContent[1].split(':')}

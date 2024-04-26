@@ -117,13 +117,17 @@
             {@const numberParagraph = match[0].split(':')[0][3]}
             {@const nowParagraphNum = incrementParagraph()}
             {@const nowParagraphText = recordParagraph(numberParagraph)}
+            <!--
             {#if (numberParagraph === '2')}
                 <h2 id="para_{nowParagraphText}" class="bottom_line"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h2>
             {:else if (numberParagraph === '3')}
-                <h3 id="para_{nowParagraphText}"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h3>
+                <h3 id="para_{nowParagraphText}" class="bottom_line"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h3>
             {:else if (numberParagraph === '4')}
-                <h4 id="para_{nowParagraphText}"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h4>
+                <h4 id="para_{nowParagraphText}" class="bottom_line"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h4>
             {/if}
+            -->
+            <h2 id="para_{nowParagraphText}" class="bottom_line"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h2>
+
 
             {#if (indexMatch === lengthMatches-1)}
                 <ParagraphContents

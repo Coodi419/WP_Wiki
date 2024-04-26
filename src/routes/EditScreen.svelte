@@ -3,23 +3,39 @@
 	import Search_bar from './../components/Search_bar.svelte';
 
 	export let path = '';
+	let hiddenButton = false;
 
 	async function getWrite(){
 		console.log(path);
-		const res = await fetch(`/write/output?path=${path}`, {method: 'POST'});
+		const res = await fetch(`/write/output?path=${path}&hb=${hiddenButton}`, {method: 'POST', mode: 'cors',});
 		const json = await res.json();
 		return json
 	}
     let writeOutputPromise = getWrite();
+
+	async function getUser() {
+		const res = await fetch("/user/information", { method: "POST", mode: 'cors',})
+		const json = await res.json();
+		return json
+	}
+	const UserOutputPromise = getUser();
+	$: {
+		writeOutputPromise = getWrite();
+		hiddenButton;
+	}
 </script>
 <main>
-	<Search_bar></Search_bar>
 	{#await writeOutputPromise}
 		<div id="contents"> </div>
 	{:then writeOutput}
-		<div id="contents">
-			<Article path="{path}" writeOutput="{writeOutput}"></Article>
-		</div>
+		{#await UserOutputPromise}
+			<div></div>
+		{:then UserOutput}
+			<Search_bar bind:hidden={hiddenButton} UserOutput="{UserOutput}"></Search_bar>
+			<div id="contents">
+				<Article path="{path}" writeOutput="{writeOutput}" hidden="{hiddenButton}"></Article>
+			</div>
+		{/await}
 	{/await}
 
 </main>
