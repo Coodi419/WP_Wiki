@@ -1,4 +1,6 @@
 <script>
+    import { element } from "svelte/internal";
+
     const histories = [
         '', '', '', '', ''
     ]
@@ -6,20 +8,29 @@
     const 문서수정횟수 = 1; 
 
     let visible = "hidden";
-    let annotation_x=50;
-    let annotation_y=99;
-    let annotation_content="도현이는 정상이 하나도 없다";
+    let annotation_content="도현이는 마우스가 하나도 없다";
     let link_id=1;
+    let target = null;
+    $: targetRectX = target && target.getBoundingClientRect().left;
+    $: targetRectY = target && target.getBoundingClientRect().top;
+    $: targetWidth = target && target.width;
+    //let vol = window.pageYOffset + target.getBoundingClientRect().top;
     function onMouse() {
         visible = "visible"
     }
     function outMouse() {
         visible = "hidden" 
     }
+    let promise = new Promise((resolve) => {
+        setInterval(resolve, 3000);
+    });
 </script>
 
 <article>
-    <a href="#fn-1" on:mouseenter={onMouse} on:mouseleave={outMouse} class="annotation"><span id="rfn-1">[1]</span></a>
+    {#await promise}
+    <p>로딩</p>
+    {:then}
+    <a href="#fn-1" on:mouseenter={onMouse} on:mouseleave={outMouse} class="annotation" bind:this={target}><span id="rfn-1">[1]</span></a>
     <div id="Edit_headline">
         <div class="Edit_title_div">
             <h1 class="Edit_title">
@@ -103,13 +114,14 @@
     <br>
     <br>
     <br>
-    <span id="fn-1"><a href="#rfn-1" class="annotation">[1]</a></span>
-    <div class="popper" x-placement="top" style="position: absolute; will-change: top, left; top: {annotation_y}; left: {annotation_x}; visibility: {visible};" on:mouseenter={onMouse} on:mouseleave={outMouse}> 
-        <div class="popper__arrow" style="left: {annotation_x/2+16};"></div><div class="popper__inner">
+    <span id="fn-1"><a href="#rfn-1" class="annotation">[1]</a> {annotation_content}</span>
+    <div class="popper" x-placement="top" style="position: absolute; will-change: top, left; top: {targetRectY+15}; left: {targetRectX-targetWidth/2}; visibility: {visible};" on:mouseenter={onMouse} on:mouseleave={outMouse}> 
+        <div class="popper__arrow" style="left: {targetRectX/2+16};"></div><div class="popper__inner">
             <a href="#fn-{link_id}" class="annotation">[{link_id}]</a>
             {annotation_content}
         </div>
     </div>
+    {/await}
 </article>
 <style>
     .popper {
@@ -123,7 +135,7 @@
         background-repeat: repeat;
         background-size: auto;
         color: rgb(33, 37, 41);
-        box-shadow: 0 0 2px hsla(0, 0%, 100%, .5);
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
         border-radius: 3px;
         max-width: 50%;
         padding: 15px;
