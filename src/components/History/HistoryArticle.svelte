@@ -121,7 +121,7 @@
     <span id="fn-2"><a href="#rfn-2" class="annotation">[2]</a> {annotation_content[1]}</span>
     <div on:mouseenter={onMouse(link_id)} on:mouseleave={outMouse}>
         {#if visible}
-            <div class="popper" x-placement="top" style="position: absolute; will-change: top, left; top: {targetRectY+15}; left: {targetRectX-width/2};"  bind:clientWidth={width} on:mouseenter={onMouse(link_id)} on:mouseleave={outMouse}> 
+            <div class="popper" x-placement="top" style="position: absolute; will-change: top, left; top: {targetRectY+15}; left: {targetRectX-width/2};"  bind:clientWidth={width}> 
                 <div class="popper__arrow" style="left: {targetRectX/2+16};"></div><div class="popper__inner">
                     <a href="#fn-{link_id}" class="annotation">[{link_id}]</a>
                     {annotation_content[link_id-1]}
