@@ -5,32 +5,35 @@
         '', '', '', '', ''
     ]
 
-    const 문서수정횟수 = 1; 
+    const 문서수정횟수 = 1;
 
-    let visible = "hidden";
-    let annotation_content="도현이는 마우스가 하나도 없다";
+    let visible = 0;
+    let invisible = 0;
+    var annotation_content = ["도현이는 마우스가 하나도 없다", "도현이는 정상이 하나도 없다"];
     let link_id=1;
-    let target = null;
-    $: targetRectX = target && target.getBoundingClientRect().left;
-    $: targetRectY = target && target.getBoundingClientRect().top;
-    $: targetWidth = target && target.width;
+    let target;
+    let width;
+    let instantTarget = [];
+    $: targetRectX = target && window.pageXOffset + target.getBoundingClientRect().left;
+    $: targetRectY = target && window.pageYOffset + target.getBoundingClientRect().top;
     //let vol = window.pageYOffset + target.getBoundingClientRect().top;
-    function onMouse() {
-        visible = "visible"
+    function onMouse(idx) {
+        visible = 1;
+        link_id = idx;
+        target = instantTarget[idx-1];
     }
     function outMouse() {
-        visible = "hidden" 
+        visible = 0
     }
-    let promise = new Promise((resolve) => {
-        setInterval(resolve, 3000);
-    });
 </script>
 
 <article>
-    {#await promise}
-    <p>로딩</p>
-    {:then}
-    <a href="#fn-1" on:mouseenter={onMouse} on:mouseleave={outMouse} class="annotation" bind:this={target}><span id="rfn-1">[1]</span></a>
+    <a href="#fn-1" class="annotation" bind:this={instantTarget[0]}><span id="rfn-1" on:mouseenter={() => onMouse(1)} on:mouseleave={outMouse}>[1]</span></a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a href="#fn-2" class="annotation" bind:this={instantTarget[1]}><span id="rfn-2" on:mouseenter={() => onMouse(2)} on:mouseleave={outMouse}>[2]</span></a>
     <div id="Edit_headline">
         <div class="Edit_title_div">
             <h1 class="Edit_title">
@@ -114,14 +117,18 @@
     <br>
     <br>
     <br>
-    <span id="fn-1"><a href="#rfn-1" class="annotation">[1]</a> {annotation_content}</span>
-    <div class="popper" x-placement="top" style="position: absolute; will-change: top, left; top: {targetRectY+15}; left: {targetRectX-targetWidth/2}; visibility: {visible};" on:mouseenter={onMouse} on:mouseleave={outMouse}> 
-        <div class="popper__arrow" style="left: {targetRectX/2+16};"></div><div class="popper__inner">
-            <a href="#fn-{link_id}" class="annotation">[{link_id}]</a>
-            {annotation_content}
-        </div>
+    <span id="fn-1"><a href="#rfn-1" class="annotation">[1]</a> {annotation_content[0]}</span> <br>
+    <span id="fn-2"><a href="#rfn-2" class="annotation">[2]</a> {annotation_content[1]}</span>
+    <div on:mouseenter={onMouse(link_id)} on:mouseleave={outMouse}>
+        {#if visible}
+            <div class="popper" x-placement="top" style="position: absolute; will-change: top, left; top: {targetRectY+15}; left: {targetRectX-width/2};"  bind:clientWidth={width} on:mouseenter={onMouse(link_id)} on:mouseleave={outMouse}> 
+                <div class="popper__arrow" style="left: {targetRectX/2+16};"></div><div class="popper__inner">
+                    <a href="#fn-{link_id}" class="annotation">[{link_id}]</a>
+                    {annotation_content[link_id-1]}
+                </div>
+            </div>
+        {/if}
     </div>
-    {/await}
 </article>
 <style>
     .popper {
