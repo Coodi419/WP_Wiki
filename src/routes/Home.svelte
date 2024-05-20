@@ -35,6 +35,9 @@
 		writeOutputPromise = getWrite();
 		hiddenButton;
 	}
+
+
+	const messageNoWriteOutput = "접근 권한이 없습니다.";
 </script>
 <main>
 	{#await UserOutputPromise}
@@ -49,20 +52,26 @@
 			{#await UserOutputPromise}
 				<div></div>
 			{:then UserOutput}
-				{@const matchesParagraph = [...writeOutput.data.content.matchAll(/\[\[H[2-4]:([^\[\]]*)\]\]/g)]}
-
-				{#if writeOutput.success}
+				{#if (writeOutput.data === "")}
 					<Header path={path} writeOutput="{writeOutput}" UserOutput="{UserOutput}"/>
 					<Nav writeOutput="{writeOutput}"/>
-					{#if matchesParagraph.length !== 0}
-						<Aside matchesParagraph="{matchesParagraph}"/>
-					{/if}
-					<Section writeOutput="{writeOutput}" matchesParagraph="{matchesParagraph}"/>
-					<Footer/>
+					<Section writeOutput="{writeOutput}" matchesParagraph="{messageNoWriteOutput}"/>
 				{:else}
-					<Header path={path} writeOutput="{writeOutput}" UserOutput="{UserOutput}"/>
-					<Section writeOutput="{writeOutput}" matchesParagraph="{matchesParagraph}"/>
+					{@const matchesParagraph = [...writeOutput.data.content.matchAll(/\[\[H[2-4]:([^\[\]]*)\]\]/g)]}
 
+					{#if writeOutput.success}
+						<Header path={path} writeOutput="{writeOutput}" UserOutput="{UserOutput}"/>
+						<Nav writeOutput="{writeOutput}"/>
+						{#if matchesParagraph.length !== 0}
+							<Aside matchesParagraph="{matchesParagraph}"/>
+						{/if}
+						<Section writeOutput="{writeOutput}" matchesParagraph="{matchesParagraph}"/>
+						<Footer/>
+					{:else}
+						<Header path={path} writeOutput="{writeOutput}" UserOutput="{UserOutput}"/>
+						<Section writeOutput="{writeOutput}" matchesParagraph="{matchesParagraph}"/>
+
+					{/if}
 				{/if}
 			{/await}
 		{/await}
