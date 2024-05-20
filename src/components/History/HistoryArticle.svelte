@@ -5,9 +5,7 @@
         '', '', '', '', ''
     ]
 
-    const 문서수정횟수 = 1;
-
-    let width;
+    const 문서수정횟수 = 1; 
 
     let visible = "hidden";
     let annotation_content="도현이는 마우스가 하나도 없다";
@@ -21,7 +19,7 @@
         visible = "visible"
     }
     function outMouse() {
-        visible = "hidden"
+        visible = "hidden" 
     }
     let promise = new Promise((resolve) => {
         setInterval(resolve, 3000);
@@ -29,7 +27,10 @@
 </script>
 
 <article>
-    <a href="#fn-1" bind:clientWidth={width} on:mouseenter={onMouse} on:mouseleave={outMouse} class="annotation" bind:this={target}><span id="rfn-1">[1]</span></a>
+    {#await promise}
+    <p>로딩</p>
+    {:then}
+    <a href="#fn-1" on:mouseenter={onMouse} on:mouseleave={outMouse} class="annotation" bind:this={target}><span id="rfn-1">[1]</span></a>
     <div id="Edit_headline">
         <div class="Edit_title_div">
             <h1 class="Edit_title">
@@ -85,19 +86,42 @@
             </div>
         </form>
     </div>
-    {#each {length: 30} as _, index}
-        <br>
-    {/each}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <span id="fn-1"><a href="#rfn-1" class="annotation">[1]</a> {annotation_content}</span>
-    {#if (visible === 'visible')}
-        {@const MTE = console.log(targetRectX, targetWidth, targetRectX-targetWidth/2) }
-        <div class="popper" x-placement="top" style="position: absolute; will-change: top, left; top: {targetRectY+15}; left: {targetRectX-width/2}; visibility: {visible};" on:mouseenter={onMouse} on:mouseleave={outMouse}>
-            <div class="popper__arrow" style="left: {targetRectX/2+16};"></div><div class="popper__inner">
-                <a href="#fn-{link_id}" class="annotation">[{link_id}]</a>
-                {annotation_content}
-            </div>
+    <div class="popper" x-placement="top" style="position: absolute; will-change: top, left; top: {targetRectY+15}; left: {targetRectX-targetWidth/2}; visibility: {visible};" on:mouseenter={onMouse} on:mouseleave={outMouse}> 
+        <div class="popper__arrow" style="left: {targetRectX/2+16};"></div><div class="popper__inner">
+            <a href="#fn-{link_id}" class="annotation">[{link_id}]</a>
+            {annotation_content}
         </div>
-    {/if}
+    </div>
+    {/await}
 </article>
 <style>
     .popper {
