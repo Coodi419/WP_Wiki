@@ -55,7 +55,7 @@
                 </div>
                 <a href="/" id="findID">[아이디/비밀번호 찾기]</a>
                 <div id="buttonBox">
-                    <a href="/" id="MakeProfile">계정 만들기</a>
+                    <a href="/account" id="MakeProfile">계정 만들기</a>
                     <button id="LoginButton" type="submit">로그인</button>
                 </div>
             </form>

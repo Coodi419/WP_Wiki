@@ -5,6 +5,7 @@
     import Login from './routes/Login.svelte'
     import EditScreen from './routes/EditScreen.svelte'
     import History from './routes/History.svelte'
+    import Account from './routes/Account.svelte'
  //   import { page } from '$app/stores'
     import { component_subscribe, debug } from 'svelte/internal';
     import { params } from 'svelte-spa-router';
@@ -18,6 +19,7 @@
     <Router {url}>
         <Route path = "/" component={Home} requestWrite={''}></Route>
         <Route path = "/login" component={Login} requestWrite={''}></Route>
+        <Route path = "/account" component={Account} requestWrite={''}></Route>
         <Route path = "/edit/*path" component={EditScreen} requestWrite={''}></Route>
         <Route path = "/history" component={History} requestWrite={''}></Route>
         <Route path= "/w/*path" component={Home} requestWrite={''}></Route>
