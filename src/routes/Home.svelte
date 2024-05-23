@@ -5,6 +5,7 @@
 	import Footer from '../components/Home/Footer.svelte';
 	import Section from '../components/Home/Section.svelte';
 	import Search_bar from './../components/Search_bar.svelte';
+	import UpperLink from "../components/UpperLink.svelte";
 
 	export let path = undefined;
 	let hiddenButton = false;
@@ -38,6 +39,15 @@
 
 
 	const messageNoWriteOutput = "접근 권한이 없습니다.";
+
+	let listTextUpper = "";
+	if (path !== undefined) {listTextUpper = path.split("/");}
+	let textUpper = "";
+	let boolTextUpper = false;
+	if (listTextUpper.length >= 1) {
+		textUpper = listTextUpper.slice(1).join("/");
+		boolTextUpper = true;
+	}
 </script>
 <main>
 	{#await UserOutputPromise}
@@ -55,6 +65,9 @@
 				{#if (writeOutput.data === "")}
 					<Header path={path} writeOutput="{writeOutput}" UserOutput="{UserOutput}"/>
 					<Nav writeOutput="{writeOutput}"/>
+					{#if (boolTextUpper)}
+						<UpperLink textUpper="{textUpper}"/>
+					{/if}
 					<Section writeOutput="{writeOutput}" matchesParagraph="{messageNoWriteOutput}"/>
 				{:else}
 					{@const matchesParagraph = [...writeOutput.data.content.matchAll(/\[\[H[2-4]:([^\[\]]*)\]\]/g)]}
@@ -62,6 +75,9 @@
 					{#if writeOutput.success}
 						<Header path={path} writeOutput="{writeOutput}" UserOutput="{UserOutput}"/>
 						<Nav writeOutput="{writeOutput}"/>
+						{#if (boolTextUpper)}
+							<UpperLink textUpper="{textUpper}"/>
+						{/if}
 						{#if matchesParagraph.length !== 0}
 							<Aside matchesParagraph="{matchesParagraph}"/>
 						{/if}
@@ -156,7 +172,7 @@
 		outline-offset: -2px;
 		padding-block: 1px;
 		padding-inline: 2px;
-		word-break: break-all;
+		word-break: keep-all;
 	}
 
 	#tool_bar {

@@ -26,7 +26,18 @@
         <div id="index_content">
             {#each matchesParagraph as match}
                 {@const textParagraph = recordParagraph(match[0][3])}
-                <span>{'\u00A0'.repeat((textParagraph[1] - 2) * 2)}<a href="#para_{textParagraph[0]}">{textParagraph[0]}</a>. {match[0].slice(5, match[0].length-2)}</span>
+                {@const textList = match[0].slice(5, match[0].length-2).split('|')}
+                {#if (textList.length === 1)}
+                    <span>{'\u00A0'.repeat((textParagraph[1] - 2) * 2)}<a href="#para_{textParagraph[0]}">{textParagraph[0]}</a>. {textList[0]}</span>
+
+                {:else}
+
+                    {#if (textList[0].startsWith('http://') || textList[0].startsWith('https://'))}
+                        <span>{'\u00A0'.repeat((textParagraph[1] - 2) * 2)}<a href="#para_{textParagraph[0]}">{textParagraph[0]}</a>. <a href="{textList[0]}">{textList[1]}</a></span>
+                    {:else}
+                        <span>{'\u00A0'.repeat((textParagraph[1] - 2) * 2)}<a href="#para_{textParagraph[0]}">{textParagraph[0]}</a>. <a href="/w/{textList[0]}">{textList[1]}</a></span>
+                    {/if}
+                {/if}
             {/each}
         </div>
     </div>

@@ -56,7 +56,7 @@
                                 {/if}
                             {/if}
                         {:else if (splitMatchContent[0] === 'P')}
-                            <a class="text_content"><img href="{splitMatchContent[1]}"></a>
+                            <a class="text_content image-container"><img src="{splitMatchContent.slice(1).join(':')}"></a>
 
                         {:else if (splitMatchContent[0] === 'F')} <!-- TODO: 미완성 -->
                             {@const splitFootnote = splitMatchContent[1].split('|')}
@@ -112,7 +112,7 @@
                             {/if}
                         {/if}
                     {:else if (splitMatchContent[0] === 'P')}
-                        <a class="text_content"><img href="{splitMatchContent[1]}"></a>
+                        <a class="text_content image-container"><img src="{splitMatchContent.slice(1).join(':')}"></a>
 
                     {:else if (splitMatchContent[0] === 'F')}
                         {@const splitFootnote = splitMatchContent[1].split('|')}
@@ -153,5 +153,12 @@
 
     .contentdiv {
         font-size: 0;
+    }
+
+    .image-container {
+		min-height: 50rem;
+		width: 800px;
+        display: block;
+		word-break: keep-all;
     }
 </style>
