@@ -126,7 +126,23 @@
                 <h4 id="para_{nowParagraphText}" class="bottom_line"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h4>
             {/if}
             -->
-            <h2 id="para_{nowParagraphText}" class="bottom_line"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{match[1]}</span></h2>
+            {@const TextLinkSplit = match[1].split('|')}
+            {#if (TextLinkSplit.length === 1)}  <!-- TODO: 아무 내용 없으면 class="bottom_line" 없게 -->
+                <h2 id="para_{nowParagraphText}" class="bottom_line"><ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{TextLinkSplit[0]}</span></h2>
+            {:else}
+                {#if (TextLinkSplit[0].startsWith('http://') || TextLinkSplit[0].startsWith('https://'))}
+
+                    <h2 id="para_{nowParagraphText}" class="bottom_line">
+                        <ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a>
+                        <a href="{TextLinkSplit[0]}"><span id="headline_{nowParagraphNum}" class="headline">&nbsp;{TextLinkSplit[1]}</span></a>
+                    </h2>
+                {:else}
+                    <h2 id="para_{nowParagraphText}" class="bottom_line">
+                        <ion-icon name="chevron-down-outline" id="down_arrow_{nowParagraphNum}" class="down_arrow" on:click="{() => click_title(`${nowParagraphNum}`)}"></ion-icon><a href="#index" id="num_{nowParagraphNum}">{nowParagraphText}.</a>
+                        <span id="headline_{nowParagraphNum}" class="headline">&nbsp;</span><a href="/w/{TextLinkSplit[0]}"><span id="headline_{nowParagraphNum}" class="headline">{TextLinkSplit[1]}</span></a>
+                    </h2>
+                {/if}
+            {/if}
 
 
             {#if (indexMatch === lengthMatches-1)}

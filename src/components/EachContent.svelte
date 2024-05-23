@@ -41,11 +41,19 @@
                         <TextHighlights splitMatchContent="{splitMatchContent}" />
                     {:else}
                         {#if (splitMatchContent[0] === 'L')}
-                            {@const splitLink = splitMatchContent[1].split('|')}
-                            {#if (splitLink.length === 1)}
-                                <a href="{splitLink[0]}" class="text_content">{splitLink[0]}</a>
-                            {:else if (splitLink.length === 2)}
-                                <a href="{splitLink[0]}" class="text_content">{splitLink[1]}</a>
+                            {@const splitLink = splitMatchContent.slice(1).join(':').split('|')}
+                            {#if (splitLink[0].startsWith('http://') || splitLink[0].startsWith('https://'))}
+                                {#if (splitLink.length === 1)}
+                                    <a href="{splitLink[0]}" class="text_content url_link">{splitLink[0]}</a>
+                                {:else if (splitLink.length === 2)}
+                                    <a href="{splitLink[0]}" class="text_content url_link">{splitLink[1]}</a>
+                                {/if}
+                            {:else}
+                                {#if (splitLink.length === 1)}
+                                    <a href="/w/{splitLink[0]}" class="text_content">{splitLink[0]}</a>
+                                {:else if (splitLink.length === 2)}
+                                    <a href="/w/{splitLink[0]}" class="text_content">{splitLink[1]}</a>
+                                {/if}
                             {/if}
                         {:else if (splitMatchContent[0] === 'P')}
                             <a class="text_content"><img href="{splitMatchContent[1]}"></a>
@@ -73,12 +81,35 @@
                     <TextHighlights splitMatchContent="{splitMatchContent}" />
                 {:else}
                     {#if (splitMatchContent[0] === 'L')}
-                        {@const splitLink = splitMatchContent[1].split('|')}
-                        <!-- {@const isExistUrl = } -->
-                        {#if (splitLink.length === 1)}
-                            <a href="{splitLink[0]}" class="text_content">{splitLink[0]}</a>
-                        {:else if (splitLink.length === 2)}
-                            <a href="{splitLink[0]}" class="text_content">{splitLink[1]}</a>
+                        {@const splitLink = splitMatchContent.slice(1).join(':').split('|')}
+                        {#if (splitLink[0].startsWith('http://') || splitLink[0].startsWith('https://'))}
+                            {#if (splitLink.length === 1)}
+                                <a href="{splitLink[0]}" class="text_content url_link">{splitLink[0]}</a>
+                            {:else if (splitLink.length === 2)}
+                                <a href="{splitLink[0]}" class="text_content url_link">{splitLink[1]}</a>
+                            {/if}
+                        {:else}
+                            {#if (splitLink[0].startsWith("/edit"))}
+                                {#if (splitLink.length === 1)}
+                                    <a href="{splitLink[0]}" class="text_content">{splitLink[0]}</a>
+                                {:else if (splitLink.length === 2)}
+                                    <a href="{splitLink[0]}" class="text_content">{splitLink[1]}</a>
+                                {/if}
+                            {:else}
+                                {#if (splitLink[0].startsWith("/edit"))}
+                                    {#if (splitLink.length === 1)}
+                                        <a href="{splitLink[0]}" class="text_content">{splitLink[0]}</a>
+                                    {:else if (splitLink.length === 2)}
+                                        <a href="{splitLink[0]}" class="text_content">{splitLink[1]}</a>
+                                    {/if}
+                                {:else}
+                                    {#if (splitLink.length === 1)}
+                                        <a href="/w/{splitLink[0]}" class="text_content">{splitLink[0]}</a>
+                                    {:else if (splitLink.length === 2)}
+                                        <a href="/w/{splitLink[0]}" class="text_content">{splitLink[1]}</a>
+                                    {/if}
+                                {/if}
+                            {/if}
                         {/if}
                     {:else if (splitMatchContent[0] === 'P')}
                         <a class="text_content"><img href="{splitMatchContent[1]}"></a>
@@ -114,6 +145,10 @@
 
     .text_content {
         font-size: 14px;
+    }
+
+    .url_link {
+        color: green;
     }
 
     .contentdiv {

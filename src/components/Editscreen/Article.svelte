@@ -45,8 +45,7 @@
                 <a href="/w/{path}">{path}</a>
             </h1>
         </div>
-        <span style="font: 14px"> hidden on </span>
-        <div class="Edit_buttons">
+        <div class="Edit_buttons"> <!-- TODO: 기능 만들기 -->
             <div class="sort">
                 <a href="/backlink/Limbus%20Company/%EC%84%A0%ED%83%9D%EC%A7%80" class="Backbutton">
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" class="button_icon">
@@ -66,6 +65,9 @@
             </div>
         </div>
     </div>
+    {#if (hidden)}
+        <span style="font: 14px"> hidden on </span>
+    {/if}
     <div id="Edit_main">
         <div>
             <form class="Edit_from" on:submit|preventDefault={postForm}>
